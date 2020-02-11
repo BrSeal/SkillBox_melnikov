@@ -1,11 +1,11 @@
-package module07.task01.LambdaExpressions;
+package module07.task02.UsingStreamAPI;
 
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
+//В проекте с сотрудниками с помощью Stream API рассчитать максимальную зарплату тех, кто пришёл в 2017 году.
 public class Main
 {
     private static String staffFile = "src//main//resources//staff.txt";
@@ -13,14 +13,12 @@ public class Main
     
     public static void main(String[] args)
     {
+        Calendar c=Calendar.getInstance();
+        c.set(2017,Calendar.JANUARY,0);
+        
+        Date date= c.getTime();
         ArrayList<Employee> staff = loadStaffFromFile();
-        staff.sort((o1, o2) ->
-        {
-            int result = o1.getSalary().compareTo(o2.getSalary());
-            if(result==0) return o1.getName().compareTo(o2.getName());
-            return result;
-        });
-        staff.forEach(System.out::println);
+       staff.stream().filter(e->e.getWorkStart().after(date)).max(Comparator.comparing(Employee::getWorkStart)).ifPresent(System.out::println);
     }
     
     private static ArrayList<Employee> loadStaffFromFile()
