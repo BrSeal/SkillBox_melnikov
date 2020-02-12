@@ -8,16 +8,11 @@ import java.math.RoundingMode;
 //зарплата складывается из фиксированной части и бонуса в виде 150% от заработной платы, если доход компании более 10 млн рублей
 public class TopManager implements Employee
 {
-    private static final BigDecimal BIG_INCOME = new BigDecimal(10_000_000);
+    public static final BigDecimal BIG_INCOME = new BigDecimal(10_000_000);
     private static final double TOP_MANAGER_BONUS = 1.5;
     private static final BigDecimal SALARY=BigDecimal.valueOf(100000);
     private BigDecimal monthSalary;
     private Company company;
-    
-    public static BigDecimal getBigIncome()
-    {
-        return BIG_INCOME;
-    }
     
     public static double getTopManagerBonus()
     {

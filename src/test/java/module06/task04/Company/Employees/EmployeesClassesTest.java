@@ -31,7 +31,6 @@ class EmployeesClassesTest
     {
         Employee topManager = new TopManager();
         
-        assertTrue(topManager.getMonthSalary().compareTo(BigDecimal.valueOf(30000))>0);
-        assertTrue(topManager.getMonthSalary().compareTo(BigDecimal.valueOf(40000))<=0);
+        assertTrue(topManager.getMonthSalary().compareTo(BigDecimal.valueOf(100000))==0);
     }
 }

@@ -465,7 +465,7 @@ class CompanyTest
         TopManager tm=new TopManager();
         c.hire(tm);
         ArrayList<Employee> emps=new ArrayList<>();
-        while(c.getIncome().compareTo(TopManager.getBigIncome())<0){
+        while(c.getIncome().compareTo(TopManager.BIG_INCOME)<0){
             Manager m=new Manager();
             c.hire(m);
             emps.add(m);
