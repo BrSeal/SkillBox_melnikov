@@ -5,7 +5,8 @@ import java.nio.file.Paths;
 import java.text.SimpleDateFormat;
 import java.util.*;
 
-//В проекте с сотрудниками с помощью Stream API рассчитать максимальную зарплату тех, кто пришёл в 2017 году.
+//В проекте с сотрудниками с помощью Stream API рассчитать максимальную зарплату тех,
+// кто пришёл в 2017 году.
 public class Main {
     private static String staffFile = "src//main//resources//staff.txt";
     private static String dateFormat = "dd.MM.yyyy";
