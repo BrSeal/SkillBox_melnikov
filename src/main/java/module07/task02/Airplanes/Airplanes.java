@@ -18,15 +18,16 @@ public class Airplanes {
         Date now = Calendar.getInstance().getTime();
         afterCalendar.add(Calendar.HOUR, 2);
         Date before = afterCalendar.getTime();
-
+    
         List<Terminal> terminals = Airport.getInstance().getTerminals();
-
-        terminals.stream()
-                .flatMap(t -> t.getFlights().stream())
-                .filter(f -> f.getDate().before(before) && f.getDate().after(now) && f.getType().equals(Flight.Type.DEPARTURE))
-                .forEach(f -> System.out.println(sdf.format(f.getDate()) + " " + f.getAircraft()));
-
-
+    
+        terminals.forEach(terminal-> terminal.getFlights().stream()
+                .filter(f ->
+                        f.getDate().before(before) &&
+                        f.getDate().after(now) &&
+                        f.getType().equals(Flight.Type.DEPARTURE)
+                )
+                .forEach(f -> System.out.println(sdf.format(f.getDate()) + " " + f.getAircraft())));
     }
 }
 
