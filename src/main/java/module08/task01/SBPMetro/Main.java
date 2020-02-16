@@ -1,7 +1,9 @@
-import core.Line;
-import core.Station;
-import org.json.simple.JSONArray;
-import org.json.simple.JSONObject;
+package module08.task01.SBPMetro;
+
+import module08.task01.SBPMetro.core.Line;
+import module08.task01.SBPMetro.core.Station;
+import org.json.JSONArray;
+import org.json.JSONObject;
 import org.json.simple.parser.JSONParser;
 
 import java.nio.file.Files;

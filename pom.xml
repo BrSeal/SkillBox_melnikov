@@ -42,8 +42,8 @@
         </dependency>
         <dependency>
             <groupId>org.junit.platform</groupId>
-            <artifactId>junit-platform-launcher</artifactId>
-            <version>1.6.0</version>
+        <artifactId>junit-platform-launcher</artifactId>
+        <version>1.6.0</version>
             <scope>test</scope>
         </dependency>
         <dependency>
@@ -57,6 +57,11 @@
             <artifactId>junit-vintage-engine</artifactId>
             <version>5.6.0</version>
             <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.json</groupId>
+            <artifactId>json</artifactId>
+            <version>20190722</version>
         </dependency>
     </dependencies>
 

@@ -1,4 +1,4 @@
-package core;
+package module08.task01.SBPMetro.core;
 
 import java.util.ArrayList;
 import java.util.List;
