@@ -1,9 +1,7 @@
 package module08.task01.ConsoleCustomerList;
 
 import module05.task03.EMailList.WrongMailException;
-import module08.task01.ConsoleCustomerList.Exceptions.NoCustomerException;
-import module08.task01.ConsoleCustomerList.Exceptions.NotEnoughDataException;
-import module08.task01.ConsoleCustomerList.Exceptions.PhoneNumberFormatException;
+import module08.task01.ConsoleCustomerList.Exceptions.*;
 
 import javax.swing.text.MaskFormatter;
 import java.text.ParseException;
@@ -18,27 +16,18 @@ public class CustomerStorage
 		storage = new HashMap<>();
 	}
 	
-	public void addCustomer(String data) throws WrongMailException, PhoneNumberFormatException, NotEnoughDataException, ParseException
+	public void addCustomer(String data) throws WrongMailException, PhoneNumberFormatException, NotEnoughDataException, ParseException,WrongNameEception
 	{
 		String[] components = data.split("\\s+");
-		if (components.length < 4)
-		{
-			throw new NotEnoughDataException();
-		}
-		boolean isMail = isValidMail(components[2]);
-		boolean isPhoneNum = isPhoneNumber(components[3]);
 		
-		if (!isMail)
-		{
-			throw new WrongMailException();
-		}
-		if (!isPhoneNum)
-		{
-			throw new PhoneNumberFormatException();
-		}
-		
+		if (components.length < 4) throw new NotEnoughDataException();
 		
 		String name = components[0] + " " + components[1];
+		
+		if(!name.matches("[а-яА-Я ]+")) throw new WrongNameEception();
+		if (!isValidMail(components[2])) throw new WrongMailException();
+		if (!isPhoneNumber(components[3])) throw new PhoneNumberFormatException();
+		
 		storage.put(name, new Customer(name, formatNumber(components[3]), components[2]));
 	}
 	
@@ -47,8 +36,9 @@ public class CustomerStorage
 		storage.values().forEach(System.out::println);
 	}
 	
-	public void removeCustomer(String name) throws NoCustomerException
+	public void removeCustomer(String name) throws NoCustomerException, WrongCommandException
 	{
+		if(name.isEmpty()||name==null) throw new WrongCommandException();
 		if(storage.containsKey(name)) storage.remove(name);
 		else throw new NoCustomerException();
 	}
@@ -60,10 +50,7 @@ public class CustomerStorage
 	
 	private boolean isValidMail(String mail)
 	{
-		
-		// RFC 5322 Official Standard
-		
-		return mail.matches("(?:[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*|\"(?:[\\x01-\\x08\\x0b\\x0c\\x0e-\\x1f\\x21\\x23-\\x5b\\x5d-\\x7f]|\\\\[\\x01-\\x09\\x0b\\x0c\\x0e-\\x7f])*\")@(?:(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?|\\[(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?|[a-z0-9-]*[a-z0-9]:(?:[\\x01-\\x08\\x0b\\x0c\\x0e-\\x1f\\x21-\\x5a\\x53-\\x7f]|\\\\[\\x01-\\x09\\x0b\\x0c\\x0e-\\x7f])+)\\])");
+		return mail.matches("^\\w[.\\w]+@\\w[.\\w]+\\.\\w{2,5}");
 	}
 	
 	private boolean isPhoneNumber(String input)
