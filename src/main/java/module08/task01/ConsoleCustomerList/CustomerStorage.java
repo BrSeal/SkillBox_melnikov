@@ -9,6 +9,8 @@ import java.util.HashMap;
 
 public class CustomerStorage
 {
+	String nameCheckRegex="[А-Я][а-я]+";
+
 	private HashMap<String, Customer> storage;
 	
 	public CustomerStorage()
@@ -21,24 +23,25 @@ public class CustomerStorage
 		String[] components = data.split("\\s+");
 		
 		if (components.length < 4) throw new NotEnoughDataException();
-		
-		String name = components[0] + " " + components[1];
-		
-		if(!name.matches("[а-яА-Я ]+")) throw new WrongNameEception();
+
+
+		if(!(components[0].matches(nameCheckRegex)&&components[1].matches(nameCheckRegex))) throw new WrongNameEception();
 		if (!isValidMail(components[2])) throw new WrongMailException();
 		if (!isPhoneNumber(components[3])) throw new PhoneNumberFormatException();
-		
+
+		String name = components[0] + " " + components[1];
 		storage.put(name, new Customer(name, formatNumber(components[3]), components[2]));
 	}
 	
-	public void listCustomers()
+	public void listCustomers() throws ClientListEmptyException
 	{
+		if(storage.isEmpty()) throw new ClientListEmptyException();
 		storage.values().forEach(System.out::println);
 	}
 	
 	public void removeCustomer(String name) throws NoCustomerException, WrongCommandException
 	{
-		if(name.isEmpty()||name==null) throw new WrongCommandException();
+		if(name.isEmpty()) throw new WrongCommandException();
 		if(storage.containsKey(name)) storage.remove(name);
 		else throw new NoCustomerException();
 	}
@@ -50,7 +53,7 @@ public class CustomerStorage
 	
 	private boolean isValidMail(String mail)
 	{
-		return mail.matches("^\\w[.\\w]+@\\w[.\\w]+\\.\\w{2,5}");
+		return mail.matches(".+@.+\\..+");
 	}
 	
 	private boolean isPhoneNumber(String input)
