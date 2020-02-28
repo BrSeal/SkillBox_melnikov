@@ -19,7 +19,6 @@ public class StationIndex {
 
     public void addStation(Station station) {
         stations.add(station);
-        station.getLine().addStation(station);
     }
 
     public void addLine(Line line) {

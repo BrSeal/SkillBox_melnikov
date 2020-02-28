@@ -1,5 +1,6 @@
 package module08.task01.SBPMetro;
 
+import module08.task01.SBPMetro.Exceptions.NoRouteException;
 import module08.task01.SBPMetro.core.Line;
 import module08.task01.SBPMetro.core.Station;
 import org.json.simple.JSONArray;
@@ -18,7 +19,7 @@ public class Main {
 
     private static StationIndex stationIndex;
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws NoRouteException {
         RouteCalculator calculator = getRouteCalculator();
 
         System.out.println("Программа расчёта маршрутов метрополитена Санкт-Петербурга\n");
