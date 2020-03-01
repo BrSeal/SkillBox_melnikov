@@ -46,9 +46,9 @@ public class RouteCalculatorTest extends Assert
 		stations.forEach(s -> stationIndex.addStation(s));
 		lines.forEach(l -> stationIndex.addLine(l));
 		
-		stationIndex.addConnection(getExpectedList("2", "5"));
-		stationIndex.addConnection(getExpectedList("6", "9"));
-		stationIndex.addConnection(getExpectedList("5", "11"));
+		stationIndex.addConnection(getList("2", "5"));
+		stationIndex.addConnection(getList("6", "9"));
+		stationIndex.addConnection(getList("5", "11"));
 		
 		calculator = new RouteCalculator(stationIndex);
 	}
@@ -56,7 +56,7 @@ public class RouteCalculatorTest extends Assert
 	@Test (expected = NoRouteException.class)
 	public void calcDurationEmptyRoad() throws NoRouteException
 	{
-		RouteCalculator.calculateDuration(getExpectedList());
+		RouteCalculator.calculateDuration(getList());
 	}
 	
 	@Test (expected = NoRouteException.class)
@@ -68,68 +68,68 @@ public class RouteCalculatorTest extends Assert
 	@Test (expected = RouteHasNullElementsException.class)
 	public void calcDurationNullElements1() throws NoRouteException
 	{
-		RouteCalculator.calculateDuration(getExpectedList("not existing station"));
+		RouteCalculator.calculateDuration(getList("not existing station"));
 	}
 	
 	@Test (expected = RouteHasNullElementsException.class)
 	public void calcDurationNullElements2() throws NoRouteException
 	{
-		RouteCalculator.calculateDuration(getExpectedList("5", "8", null));
+		RouteCalculator.calculateDuration(getList("5", "8", null));
 	}
 	
 	@Test
 	public void calcDurationOneLine1() throws NoRouteException
 	{
-		double actual = RouteCalculator.calculateDuration(getExpectedList("0"));
+		double actual = RouteCalculator.calculateDuration(getList("0"));
 		assertEquals(0d, actual, 0.0001);
 	}
 	
 	@Test
 	public void calcDurationOneLine2() throws NoRouteException
 	{
-		double actual = RouteCalculator.calculateDuration(getExpectedList("0", "1"));
+		double actual = RouteCalculator.calculateDuration(getList("0", "1"));
 		assertEquals(2.5, actual, 0.0001);
 	}
 	
 	@Test
 	public void calcDurationOneLine3() throws NoRouteException
 	{
-		double actual = RouteCalculator.calculateDuration(getExpectedList("0", "1", "2"));
+		double actual = RouteCalculator.calculateDuration(getList("0", "1", "2"));
 		assertEquals(5d, actual, 0.0001);
 	}
 	
 	@Test
 	public void calcDurationManyLines1() throws NoRouteException
 	{
-		double actual = RouteCalculator.calculateDuration(getExpectedList("0", "4"));
+		double actual = RouteCalculator.calculateDuration(getList("0", "4"));
 		assertEquals(3.5, actual, 0.0001);
 	}
 	
 	@Test
 	public void calcDurationManyLines2() throws NoRouteException
 	{
-		double actual = RouteCalculator.calculateDuration(getExpectedList("0", "1", "4"));
+		double actual = RouteCalculator.calculateDuration(getList("0", "1", "4"));
 		assertEquals(6d, actual, 0.0001);
 	}
 	
 	@Test
 	public void calcDurationManyLines3() throws NoRouteException
 	{
-		double actual = RouteCalculator.calculateDuration(getExpectedList("0", "1", "4", "5"));
+		double actual = RouteCalculator.calculateDuration(getList("0", "1", "4", "5"));
 		assertEquals(8.5, actual, 0.0001);
 	}
 	
 	@Test
 	public void calcDurationManyLines4() throws NoRouteException
 	{
-		double actual = RouteCalculator.calculateDuration(getExpectedList("0", "4", "8"));
+		double actual = RouteCalculator.calculateDuration(getList("0", "4", "8"));
 		assertEquals(7d, actual, 0.0001);
 	}
 	
 	@Test
 	public void calcDurationManyLines5() throws NoRouteException
 	{
-		double actual = RouteCalculator.calculateDuration(getExpectedList("0", "1", "4", "5", "8", "9"));
+		double actual = RouteCalculator.calculateDuration(getList("0", "1", "4", "5", "8", "9"));
 		assertEquals(14.5, actual, 0.0001);
 	}
 	
@@ -167,7 +167,7 @@ public class RouteCalculatorTest extends Assert
 	public void getShortestRouteOneLine1() throws NoRouteException
 	{
 		from = to = stations.get(0);
-		assertEquals(getExpectedList("0"), calculator.getShortestRoute(from, to));
+		assertEquals(getList("0"), calculator.getShortestRoute(from, to));
 	}
 	
 	@Test
@@ -175,7 +175,7 @@ public class RouteCalculatorTest extends Assert
 	{
 		from = stations.get(0);
 		to = stations.get(1);
-		assertEquals(getExpectedList("0", "1"), calculator.getShortestRoute(from, to));
+		assertEquals(getList("0", "1"), calculator.getShortestRoute(from, to));
 	}
 	
 	@Test
@@ -184,7 +184,7 @@ public class RouteCalculatorTest extends Assert
 		from = stations.get(0);
 		to = stations.get(3);
 		
-		assertEquals(getExpectedList("0", "1", "2", "3"), calculator.getShortestRoute(from, to));
+		assertEquals(getList("0", "1", "2", "3"), calculator.getShortestRoute(from, to));
 	}
 	
 	@Test
@@ -193,7 +193,7 @@ public class RouteCalculatorTest extends Assert
 		from = stations.get(1);
 		to = stations.get(0);
 		
-		assertEquals(getExpectedList("1", "0"), calculator.getShortestRoute(from, to));
+		assertEquals(getList("1", "0"), calculator.getShortestRoute(from, to));
 	}
 	
 	@Test
@@ -201,7 +201,7 @@ public class RouteCalculatorTest extends Assert
 	{
 		from = stations.get(3);
 		to = stations.get(0);
-		assertEquals(getExpectedList("3", "2", "1", "0"), calculator.getShortestRoute(from, to));
+		assertEquals(getList("3", "2", "1", "0"), calculator.getShortestRoute(from, to));
 	}
 	
 	//=======================================================================//
@@ -211,7 +211,7 @@ public class RouteCalculatorTest extends Assert
 	{
 		from = stations.get(2);
 		to = stations.get(5);
-		assertEquals(getExpectedList("2", "5"), calculator.getShortestRoute(from, to));
+		assertEquals(getList("2", "5"), calculator.getShortestRoute(from, to));
 	}
 	
 	@Test
@@ -219,7 +219,7 @@ public class RouteCalculatorTest extends Assert
 	{
 		from = stations.get(0);
 		to = stations.get(5);
-		assertEquals(getExpectedList("0", "1", "2", "5"), calculator.getShortestRoute(from, to));
+		assertEquals(getList("0", "1", "2", "5"), calculator.getShortestRoute(from, to));
 	}
 	
 	@Test
@@ -227,7 +227,7 @@ public class RouteCalculatorTest extends Assert
 	{
 		from = stations.get(1);
 		to = stations.get(9);
-		assertEquals(getExpectedList("1", "2", "5", "6", "9"), calculator.getShortestRoute(from, to));
+		assertEquals(getList("1", "2", "5", "6", "9"), calculator.getShortestRoute(from, to));
 	}
 	
 	@Test
@@ -235,7 +235,7 @@ public class RouteCalculatorTest extends Assert
 	{
 		from = stations.get(7);
 		to = stations.get(11);
-		assertEquals(getExpectedList("7", "6", "5", "11"), calculator.getShortestRoute(from, to));
+		assertEquals(getList("7", "6", "5", "11"), calculator.getShortestRoute(from, to));
 	}
 	
 	@Test
@@ -243,7 +243,7 @@ public class RouteCalculatorTest extends Assert
 	{
 		from = stations.get(5);
 		to = stations.get(2);
-		assertEquals(getExpectedList("5", "2"), calculator.getShortestRoute(from, to));
+		assertEquals(getList("5", "2"), calculator.getShortestRoute(from, to));
 	}
 	
 	@Test
@@ -251,7 +251,7 @@ public class RouteCalculatorTest extends Assert
 	{
 		from = stations.get(5);
 		to = stations.get(0);
-		assertEquals(getExpectedList("5", "2", "1", "0"), calculator.getShortestRoute(from, to));
+		assertEquals(getList("5", "2", "1", "0"), calculator.getShortestRoute(from, to));
 	}
 	
 	@Test
@@ -259,7 +259,7 @@ public class RouteCalculatorTest extends Assert
 	{
 		from = stations.get(9);
 		to = stations.get(1);
-		assertEquals(getExpectedList("9", "6", "5", "2", "1"), calculator.getShortestRoute(from, to));
+		assertEquals(getList("9", "6", "5", "2", "1"), calculator.getShortestRoute(from, to));
 	}
 	
 	@Test
@@ -267,10 +267,10 @@ public class RouteCalculatorTest extends Assert
 	{
 		from = stations.get(11);
 		to = stations.get(7);
-		assertEquals(getExpectedList("11", "5", "6", "7"), calculator.getShortestRoute(from, to));
+		assertEquals(getList("11", "5", "6", "7"), calculator.getShortestRoute(from, to));
 	}
 	
-	private static List<Station> getExpectedList(String... stations)
+	private static List<Station> getList(String... stations)
 	{
 		List<Station> result = new ArrayList<>();
 		for (String stationName : stations)
