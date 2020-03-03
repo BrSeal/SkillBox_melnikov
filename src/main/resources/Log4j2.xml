@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration status="WARN">
+    <appenders>
+        <File name="searched" fileName="logs/searched.log" immediateFlush="true">
+            <PatternLayout pattern="%d{yyy-MM-dd HH:mm:ss} [%t] %-5level %logger{36} - %msg%n"/>
+        </File>
+
+        <File name="stationsNotFound" fileName="logs/stationsNotFound.log" immediateFlush="true">
+            <PatternLayout pattern="%d{yyy-MM-dd HH:mm:ss} [%t] %-5level %logger{36} - %msg%n"/>
+        </File>
+
+        <File name="exceptions" fileName="logs/exceptions.log" immediateFlush="true">
+            <PatternLayout pattern="%d{yyy-MM-dd HH:mm:ss} [%t] %-5level %logger{36} - %msg%n"/>
+        </File>
+    </appenders>
+    <loggers>
+
+        <logger name="searched" level="info">
+            <appender-ref ref="searched.log"/>
+        </logger>
+
+        <logger name="stationsNotFound" level="warn">
+            <appender-ref ref="stationsNotFound.log"/>
+        </logger>
+
+        <logger name="stationsNotFound" level="error">
+            <appender-ref ref="exceptions.log"/>
+        </logger>
+    </loggers>
+</configuration>
