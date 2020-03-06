@@ -1,30 +1,36 @@
 <?xml version="1.0" encoding="UTF-8"?>
+
 <configuration status="WARN">
+
     <appenders>
-        <File name="searched" fileName="logs/searched.log" immediateFlush="true">
-            <PatternLayout pattern="%d{yyy-MM-dd HH:mm:ss} [%t] %-5level %logger{36} - %msg%n"/>
+        <File name="SearchedStations" fileName="logs/searched.log">
+            <PatternLayout pattern="%msg%n"/>
+            <Filters>
+                <MarkerFilter marker="INPUT_HISTORY"/>
+            </Filters>
         </File>
-
-        <File name="stationsNotFound" fileName="logs/stationsNotFound.log" immediateFlush="true">
-            <PatternLayout pattern="%d{yyy-MM-dd HH:mm:ss} [%t] %-5level %logger{36} - %msg%n"/>
+        <File name="InvalidStations" fileName="logs/stationsNotFound.log">
+            <PatternLayout pattern="%msg%n"/>
+            <Filters>
+                <MarkerFilter marker="INVALID_STATIONS" />
+            </Filters>
         </File>
-
-        <File name="exceptions" fileName="logs/exceptions.log" immediateFlush="true">
-            <PatternLayout pattern="%d{yyy-MM-dd HH:mm:ss} [%t] %-5level %logger{36} - %msg%n"/>
+        <File name="InvalidStations" fileName="logs/stationsNotFound.log">
+            <PatternLayout pattern="%msg%n"/>
+            <Filters>
+                <MarkerFilter marker="INVALID_STATIONS" />
+            </Filters>
         </File>
     </appenders>
+
     <loggers>
 
-        <logger name="searched" level="info">
-            <appender-ref ref="searched.log"/>
-        </logger>
+        <root level="info">
 
-        <logger name="stationsNotFound" level="warn">
-            <appender-ref ref="stationsNotFound.log"/>
-        </logger>
+            <appender-ref ref="SearchedStations"/>
+            <appender-ref ref="InvalidStations"/>
+            <appender-ref ref="Exceptions"/>
+        </root>
 
-        <logger name="stationsNotFound" level="error">
-            <appender-ref ref="exceptions.log"/>
-        </logger>
     </loggers>
 </configuration>
