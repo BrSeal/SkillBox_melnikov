@@ -33,19 +33,28 @@ public class Main
 		
 		System.out.println("Программа расчёта маршрутов метрополитена Санкт-Петербурга\n");
 		scanner = new Scanner(System.in);
+		
+		String fromN="", toN="";
 		for (; ; )
 		{
 			try
 			{
 				Station from = takeStation("Введите станцию отправления:");
 				Station to = takeStation("Введите станцию назначения:");
+				
+				if(from!=null&&to!=null)
+				{
+					fromN = from.getName();
+					toN = to.getName();
+				}
+				
 				List<Station> route = calculator.getShortestRoute(from, to);
 				System.out.println("Маршрут:");
 				printRoute(route);
 				System.out.println("Длительность: " + RouteCalculator.calculateDuration(route) + " минут");
 			}catch (Exception e)
 			{
-				LOGGER.throwing(e);
+				LOGGER.error("\nСтанция отправления: "+ fromN+"\nСтанция назначения: "+ toN,e);
 				System.out.println("Между станциями маршрута нет");
 			}
 		}
