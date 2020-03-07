@@ -1,12 +1,8 @@
 package module08.task01.SBPMetro;
 
-import module08.task01.SBPMetro.Exceptions.NoRouteException;
 import module08.task01.SBPMetro.core.Line;
 import module08.task01.SBPMetro.core.Station;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
-import org.apache.logging.log4j.Marker;
-import org.apache.logging.log4j.MarkerManager;
+import org.apache.logging.log4j.*;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
@@ -25,12 +21,16 @@ public class Main
 
 	private static String dataFile = "src/main/resources/map.json";
 	private static Scanner scanner;
-
 	private static StationIndex stationIndex;
 	
 	public static void main(String[] args)
 	{
 		RouteCalculator calculator = getRouteCalculator();
+		
+		Line newLine= new Line(6,"Кривая");
+		stationIndex.addLine(newLine);
+		stationIndex.addStation(new Station("Новая",newLine));
+		
 		System.out.println("Программа расчёта маршрутов метрополитена Санкт-Петербурга\n");
 		scanner = new Scanner(System.in);
 		for (; ; )
@@ -42,12 +42,11 @@ public class Main
 				List<Station> route = calculator.getShortestRoute(from, to);
 				System.out.println("Маршрут:");
 				printRoute(route);
-				
-				
 				System.out.println("Длительность: " + RouteCalculator.calculateDuration(route) + " минут");
 			}catch (Exception e)
 			{
 				LOGGER.throwing(e);
+				System.out.println("Между станциями маршрута нет");
 			}
 		}
 	}
@@ -77,7 +76,7 @@ public class Main
 		}
 	}
 	
-	private static Station takeStation(String message) throws Exception
+	private static Station takeStation(String message)
 	{
 		for (; ; )
 		{
@@ -90,8 +89,7 @@ public class Main
 				return station;
 			}
 			LOGGER.info(INVALID_STATIONS_MARKER, "Станция не найдена: {}", line);
-			throw new NoRouteException();
-			//System.out.println("Станция не найдена :(");
+			System.out.println("Станция не найдена :(");
 		}
 	}
 	

@@ -1,0 +1,10 @@
+07.03.2020 12:43:15 [main] Throwing
+module08.task01.SBPMetro.Exceptions.NoRouteException: null
+	at module08.task01.SBPMetro.RouteCalculator.getRouteWithOneConnection(RouteCalculator.java:113) ~[classes/:?]
+	at module08.task01.SBPMetro.RouteCalculator.getShortestRoute(RouteCalculator.java:31) ~[classes/:?]
+	at module08.task01.SBPMetro.Main.main(Main.java:37) [classes/:?]
+07.03.2020 12:52:00 [main] Throwing
+module08.task01.SBPMetro.Exceptions.NoRouteException: null
+	at module08.task01.SBPMetro.RouteCalculator.getRouteWithTwoConnections(RouteCalculator.java:141) ~[classes/:?]
+	at module08.task01.SBPMetro.RouteCalculator.getShortestRoute(RouteCalculator.java:35) ~[classes/:?]
+	at module08.task01.SBPMetro.Main.main(Main.java:41) [classes/:?]

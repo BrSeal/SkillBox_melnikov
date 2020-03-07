@@ -4,32 +4,27 @@
 
     <appenders>
         <File name="SearchedStations" fileName="logs/searched.log">
-            <PatternLayout pattern="%msg%n"/>
+            <PatternLayout pattern="%d{dd.MM.yyy HH:mm:ss} [%t] %msg%n"/>
             <Filters>
                 <MarkerFilter marker="INPUT_HISTORY"/>
             </Filters>
         </File>
-        <File name="InvalidStations" fileName="logs/stationsNotFound.log">
-            <PatternLayout pattern="%msg%n"/>
+        <File name="InvalidStations" fileName="logs/invalid_stations.log">
+            <PatternLayout pattern="%d{dd.MM.yyy HH:mm:ss} [%t] %msg%n"/>
             <Filters>
-                <MarkerFilter marker="INVALID_STATIONS" />
+                <MarkerFilter marker="INVALID_STATIONS"/>
             </Filters>
         </File>
-        <File name="InvalidStations" fileName="logs/stationsNotFound.log">
-            <PatternLayout pattern="%msg%n"/>
-            <Filters>
-                <MarkerFilter marker="INVALID_STATIONS" />
-            </Filters>
+        <File name="errors" fileName="logs/errors.log">
+            <PatternLayout pattern="%d{dd.MM.yyy HH:mm:ss} [%t] %msg%n"/>
         </File>
     </appenders>
 
     <loggers>
-
         <root level="info">
-
             <appender-ref ref="SearchedStations"/>
             <appender-ref ref="InvalidStations"/>
-            <appender-ref ref="Exceptions"/>
+            <appender-ref ref="errors" level="error"/>
         </root>
 
     </loggers>
