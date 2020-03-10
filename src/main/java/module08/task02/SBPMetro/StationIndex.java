@@ -1,7 +1,7 @@
-package module08.task01.SBPMetro;
+package module08.task02.SBPMetro;
 
-import module08.task01.SBPMetro.core.Line;
-import module08.task01.SBPMetro.core.Station;
+import module08.task02.SBPMetro.core.Line;
+import module08.task02.SBPMetro.core.Station;
 
 import java.util.*;
 import java.util.stream.Collectors;
