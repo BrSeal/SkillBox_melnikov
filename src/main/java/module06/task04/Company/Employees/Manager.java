@@ -23,27 +23,26 @@ public class Manager implements Employee {
     }
 
     @Override
+    public Company getCompany() {
+        return company;
+    }
+
+    @Override
     public void setCompany(Company c) {
 
-        if(c!=null) {
+        if (c != null) {
             this.company = c;
             boolean before = company.getIncome().compareTo(TopManager.BIG_INCOME) <= 0;
             company.setIncome(company.getIncome().add(moneyGain));
             boolean after = c.getIncome().compareTo(TopManager.BIG_INCOME) > 0;
             if (before && after) company.calcSalaries();
-        }
-        else{
+        } else {
             boolean before = company.getIncome().compareTo(TopManager.BIG_INCOME) > 0;
             company.setIncome(company.getIncome().subtract(moneyGain));
             boolean after = company.getIncome().compareTo(TopManager.BIG_INCOME) <= 0;
             if (before && after) company.calcSalaries();
-            this.company=null;
+            this.company = null;
         }
-    }
-
-    @Override
-    public Company getCompany() {
-        return company;
     }
 
     public BigDecimal getMoneyGain() {

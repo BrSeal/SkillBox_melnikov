@@ -5,7 +5,6 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.InputStreamReader;
 import java.nio.file.InvalidPathException;
-import java.util.Objects;
 
 
 public class SizeCalculator {
@@ -13,8 +12,8 @@ public class SizeCalculator {
     public static final long BYTES_IN_MB = 1048576;
     public static final long BYTES_IN_GB = 1099511627776L;
 
-    public static final String helloMsg="Insert path to file or directory you want to measure or \"exit\" to quit:";
-    public static final String errMsg="Enter path to existing file or directory!";
+    public static final String helloMsg = "Insert path to file or directory you want to measure or \"exit\" to quit:";
+    public static final String errMsg = "Enter path to existing file or directory!";
 
     public static void main(String[] args) {
         BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
@@ -30,9 +29,9 @@ public class SizeCalculator {
                 System.out.println("File not found!");
                 System.out.println(errMsg);
             } catch (InvalidPathException e) {
-                System.out.println("Path is "+e.getInput()+"!");
+                System.out.println("Path is " + e.getInput() + "!");
                 System.out.println(errMsg);
-            }catch (Exception e) {
+            } catch (Exception e) {
                 e.printStackTrace();
             }
         }

@@ -20,7 +20,7 @@ public class Airplanes {
         Airport.getInstance().getTerminals().stream()
                 .flatMap(terminal -> terminal.getFlights().stream())
                 .filter(f ->
-                                f.getDate().before(before) &&
+                        f.getDate().before(before) &&
                                 f.getDate().after(now) &&
                                 f.getType().equals(Flight.Type.DEPARTURE)
                 )

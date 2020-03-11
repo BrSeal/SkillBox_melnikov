@@ -1,15 +1,16 @@
 package module03.task01.Cat;
 
-public class Loader
-{
-    public static void main(String[] args)
-    {
+        public class Loader
+        {
+        public static void main(String[] args)
+        {
         // создаем кошек, кормим, поим и смотрим на вес
-       for (int i=0;i<5;i++){
-           Cat cat=new Cat();
-           System.out.println("Cat № "+i);
-           feedCatAndCheck(cat);
-       }
+        for (int i=0;i
+<5;i++){
+        Cat cat=new Cat();
+        System.out.println("Cat № "+i);
+        feedCatAndCheck(cat);
+        }
 
         //убиваем кошек
         Cat feededCat = new Cat();
@@ -22,12 +23,12 @@ public class Loader
         System.out.println("Lets meow one cat to death!");
         while (!meowDeadCat.getStatus().equals("Dead"))
         {
-            meowDeadCat.meow();
+        meowDeadCat.meow();
         }
         System.out.println("Finally that cat is "+meowDeadCat.getStatus());
 
-    }
-    static void feedCatAndCheck(Cat cat){
+        }
+        static void feedCatAndCheck(Cat cat){
         double feedAmount=Math.random()*300;
         double origWeight=cat.getWeight();
         cat.feed(feedAmount);

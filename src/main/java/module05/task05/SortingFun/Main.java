@@ -51,7 +51,7 @@ public class Main {
         }
     }
 
-    private static void infiniteSearch(ArrayList<String> list){
+    private static void infiniteSearch(ArrayList<String> list) {
         HashSet<String> hashSet = new HashSet<>(list);
         TreeSet<String> treeSet = new TreeSet<>(list);
 

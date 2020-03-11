@@ -10,17 +10,33 @@ import java.util.List;
 import java.util.Set;
 
 public class RouteCalculator {
-    private StationIndex stationIndex;
-
     private static double interStationDuration = 2.5;
     private static double interConnectionDuration = 3.5;
+    private StationIndex stationIndex;
 
     public RouteCalculator(StationIndex stationIndex) {
         this.stationIndex = stationIndex;
     }
 
+    //tested
+    public static double calculateDuration(List<Station> route) throws NoRouteException {
+        if (route == null || route.isEmpty()) throw new NoRouteException();
+        if (route.contains(null)) throw new RouteHasNullElementsException();
+        double duration = 0;
+        Station previousStation = null;
+        for (int i = 0; i < route.size(); i++) {
+            Station station = route.get(i);
+            if (i > 0) {
+                duration += previousStation.getLine().equals(station.getLine()) ?
+                        interStationDuration : interConnectionDuration;
+            }
+            previousStation = station;
+        }
+        return duration;
+    }
+
     public List<Station> getShortestRoute(Station from, Station to) throws NoRouteException {
-        if(from==null||to==null) throw new RouteHasNullElementsException();
+        if (from == null || to == null) throw new RouteHasNullElementsException();
 
         List<Station> route = getRouteOnTheLine(from, to);
         if (route != null) {
@@ -33,25 +49,8 @@ public class RouteCalculator {
         }
 
         route = getRouteWithTwoConnections(from, to);
-        if(route.isEmpty()||route==null)throw new NoRouteException();
+        if (route.isEmpty() || route == null) throw new NoRouteException();
         return route;
-    }
-
-    //tested
-    public static double calculateDuration(List<Station> route) throws NoRouteException{
-        if(route==null||route.isEmpty()) throw new NoRouteException();
-        if(route.contains(null)) throw new RouteHasNullElementsException();
-        double duration = 0;
-        Station previousStation = null;
-        for (int i = 0; i < route.size(); i++) {
-            Station station = route.get(i);
-            if (i > 0) {
-                duration += previousStation.getLine().equals(station.getLine()) ?
-                        interStationDuration : interConnectionDuration;
-            }
-            previousStation = station;
-        }
-        return duration;
     }
 
     //=========================================================================
@@ -109,10 +108,10 @@ public class RouteCalculator {
                 }
             }
         }
-        return route.isEmpty()?null:route;
+        return route.isEmpty() ? null : route;
     }
 
-    private List<Station> getRouteWithTwoConnections(Station from, Station to) throws NoRouteException{
+    private List<Station> getRouteWithTwoConnections(Station from, Station to) throws NoRouteException {
         if (from.getLine().equals(to.getLine())) {
             return null;
         }
@@ -138,7 +137,7 @@ public class RouteCalculator {
                 }
             }
         }
-        if(route.isEmpty()) throw new NoRouteException();
+        if (route.isEmpty()) throw new NoRouteException();
         return route;
     }
 

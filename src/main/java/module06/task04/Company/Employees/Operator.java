@@ -18,13 +18,13 @@ public class Operator implements Employee {
     }
 
     @Override
-    public void setCompany(Company company) {
-        this.company = company;
+    public Company getCompany() {
+        return company;
     }
 
     @Override
-    public Company getCompany() {
-        return company;
+    public void setCompany(Company company) {
+        this.company = company;
     }
 
     @Override
