@@ -61,7 +61,7 @@ class FileCopierTest {
             }
         } else {
             if (b.isDirectory()) return false;
-            if (a.hashCode() != b.hashCode()) return false;
+            return a.hashCode() == b.hashCode();
         }
         return true;
     }
