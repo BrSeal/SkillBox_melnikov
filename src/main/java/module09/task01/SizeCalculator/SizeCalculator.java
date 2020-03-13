@@ -1,5 +1,7 @@
 package module09.task01.SizeCalculator;
 
+import org.apache.commons.io.FileUtils;
+
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -55,7 +57,11 @@ public class SizeCalculator {
         return size;
     }
 
-    public static String formatSize(long size) {
+    public static String formatSizeApache(long size){
+        return FileUtils.byteCountToDisplaySize(size);
+    }
+
+    public static String formatSizeManual(long size) {
         StringBuilder sb = new StringBuilder();
 
         if ((size / BYTES_IN_GB) > 0) sb.append(size / BYTES_IN_GB).append(" Gb ");

@@ -84,63 +84,63 @@ class SizeCalculatorTest {
 
     @Test
     void formatTest1() {
-        String actual = formatSize(0);
+        String actual = formatSizeManual(0);
         String expected = "0 bytes";
         assertEquals(expected, actual);
     }
 
     @Test
     void formatTest2() {
-        String actual = formatSize(1);
+        String actual = formatSizeManual(1);
         String expected = "1 b";
         assertEquals(expected, actual);
     }
 
     @Test
     void formatTest3() {
-        String actual = formatSize(BYTES_IN_KB);
+        String actual = formatSizeManual(BYTES_IN_KB);
         String expected = "1 Kb";
         assertEquals(expected, actual);
     }
 
     @Test
     void formatTest4() {
-        String actual = formatSize(BYTES_IN_MB);
+        String actual = formatSizeManual(BYTES_IN_MB);
         String expected = "1 Mb";
         assertEquals(expected, actual);
     }
 
     @Test
     void formatTest5() {
-        String actual = formatSize(BYTES_IN_GB);
+        String actual = formatSizeManual(BYTES_IN_GB);
         String expected = "1 Gb";
         assertEquals(expected, actual);
     }
 
     @Test
     void formatTest6() {
-        String actual = formatSize(BYTES_IN_GB + BYTES_IN_KB + BYTES_IN_MB + 45);
+        String actual = formatSizeManual(BYTES_IN_GB + BYTES_IN_KB + BYTES_IN_MB + 45);
         String expected = "1 Gb 1 Mb 1 Kb 45 b";
         assertEquals(expected, actual);
     }
 
     @Test
     void formatTest7() {
-        String actual = formatSize(BYTES_IN_GB * 12 + BYTES_IN_KB * 345 + BYTES_IN_MB * 77 + 945);
+        String actual = formatSizeManual(BYTES_IN_GB * 12 + BYTES_IN_KB * 345 + BYTES_IN_MB * 77 + 945);
         String expected = "12 Gb 77 Mb 345 Kb 945 b";
         assertEquals(expected, actual);
     }
 
     @Test
     void formatTest8() {
-        String actual = formatSize(BYTES_IN_GB * 12 + 945);
+        String actual = formatSizeManual(BYTES_IN_GB * 12 + 945);
         String expected = "12 Gb 945 b";
         assertEquals(expected, actual);
     }
 
     @Test
     void formatTest9() {
-        String actual = formatSize(BYTES_IN_KB * 345 + BYTES_IN_MB * 77 + 945);
+        String actual = formatSizeManual(BYTES_IN_KB * 345 + BYTES_IN_MB * 77 + 945);
         String expected = "77 Mb 345 Kb 945 b";
         assertEquals(expected, actual);
     }
