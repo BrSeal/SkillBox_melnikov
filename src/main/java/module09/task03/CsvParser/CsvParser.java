@@ -13,9 +13,7 @@ import java.util.stream.Collectors;
 public class CsvParser
 {
 	private static String outputMessage = "Общий %s по позиции %-40s составляет %d\n";
-	
 	private long totalIncome, totalSpent;
-	
 	private HashMap<String, Long> groupMap;
 	private File csvFile;
 	
@@ -23,24 +21,20 @@ public class CsvParser
 	{
 		return totalIncome;
 	}
-	
 	public long getTotalSpent()
 	{
 		return totalSpent;
 	}
-	
 	public HashMap<String,Long> getGroupMap(){
 		return (HashMap<String,Long>)groupMap.clone();
 	}
 	
-	public CsvParser(File csvFile)
-	{
+	public CsvParser(File csvFile) {
 		groupMap = new HashMap<>();
 		this.csvFile = csvFile;
 	}
 	
-	void parse() throws IOException
-	{
+	public void parse() throws IOException {
 		List<String> lines = Files.readAllLines(Paths.get(csvFile.getPath()));
 		
 		ArrayList<String[]> parsedList = lines.stream().map(f -> f.split(",")).skip(1).collect(Collectors.toCollection(ArrayList::new));
@@ -66,8 +60,7 @@ public class CsvParser
 		}
 	}
 	
-	private void addToMap(String key, long value)
-	{
+	private void addToMap(String key, long value) {
 		if (groupMap.containsKey(key))
 		{
 			groupMap.put(key, (groupMap.get(key) + value));
@@ -78,8 +71,7 @@ public class CsvParser
 		}
 	}
 	
-	public void printMap()
-	{
+	public void printMap() {
 		for (Map.Entry<String, Long> pair : groupMap.entrySet())
 		{
 			long val = pair.getValue();
