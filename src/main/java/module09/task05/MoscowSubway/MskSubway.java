@@ -50,19 +50,17 @@ public class MskSubway {
             doc = Jsoup.parse(html, "UTF-8");
         }
 
-        Elements rows = doc.select("table[class='standard sortable jquery-tablesorter']").select("tbody").select("tr");
-
-        for (Element row : rows) {
-            Elements cols = row.select("td");
-            getData(cols);
+        doc.select("table[class='standard sortable']")
+                .select("tbody")
+                .select("tr")
+                .forEach(row -> getData(row.select("td")));
         }
-    }
 
     private void getData(Elements cols) {
+        if(cols.size()==0) return;
         int num = getNum(cols.get(0).select("span").get(0));
         String lineName = cols.get(0).select("span").get(1).attr("title");
         String stationName = cols.get(1).select("a").get(0).text();
-
         //line
         Line line = new Line(num, lineName);
         lines.put(num, line);
