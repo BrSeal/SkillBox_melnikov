@@ -1,7 +1,8 @@
 package module09.task05.MoscowSubway;
 
 import com.google.gson.*;
-import module09.task05.MoscowSubway.JsonPresenters.LineAndConnectionJsonPresenter;
+import module09.task05.MoscowSubway.JsonPresenters.ConnectionJsonPresenter;
+import module09.task05.MoscowSubway.JsonPresenters.LineJsonPresenter;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
@@ -17,11 +18,11 @@ import java.util.TreeMap;
 import java.util.TreeSet;
 
 public class MskSubway {
-    private TreeSet<LineAndConnectionJsonPresenter> lines;
+    private TreeSet<LineJsonPresenter> lines;
     private TreeMap<Integer, ArrayList<String>> stations;
-    private HashSet<ArrayList<LineAndConnectionJsonPresenter>> connections;
+    private HashSet<ArrayList<ConnectionJsonPresenter>> connections;
 
-    public TreeSet<LineAndConnectionJsonPresenter> getLines() {
+    public TreeSet<LineJsonPresenter> getLines() {
         return lines;
     }
 
@@ -29,14 +30,14 @@ public class MskSubway {
         return stations;
     }
 
-    public HashSet<ArrayList<LineAndConnectionJsonPresenter>> getConnections() {
+    public HashSet<ArrayList<ConnectionJsonPresenter>> getConnections() {
         return connections;
     }
 
     public MskSubway() {
         lines = new TreeSet<>();
         stations = new TreeMap<>();
-        connections = new HashSet<ArrayList<LineAndConnectionJsonPresenter>>();
+        connections = new HashSet<>();
     }
 
     public void parse(String url) throws IOException {
@@ -62,8 +63,10 @@ public class MskSubway {
         int num = getNum(cols.get(0).select("span").get(0));
         String lineName = cols.get(0).select("span").get(1).attr("title");
         String stationName = cols.get(1).select("a").get(0).text();
+        String lineColor = cols.get(0).attr("style");
         //line
-        lines.add(new LineAndConnectionJsonPresenter(num, lineName));
+        lineColor=lineColor.substring(lineColor.indexOf('#')+1);
+        lines.add(new LineJsonPresenter(num, lineName,lineColor));
 
         //station
         addToStationsMap(num, stationName);
@@ -71,13 +74,13 @@ public class MskSubway {
         //connection
         Elements connected = cols.get(3).select("span");
         if (connected.size() / 2 > 0) {
-            ArrayList<LineAndConnectionJsonPresenter> localConn = new ArrayList<>();
-            localConn.add(new LineAndConnectionJsonPresenter(num,stationName));
+            ArrayList<ConnectionJsonPresenter> localConn = new ArrayList<>();
+            localConn.add(new ConnectionJsonPresenter(num,stationName));
 
             for (int i = 0; i < connected.size(); i += 2) {
                 int numLineConnected = getNum(connected.get(i));
                 String nameConnected = purifyName(connected.get(i + 1).attr("title"));
-                localConn.add(new LineAndConnectionJsonPresenter(numLineConnected,nameConnected));
+                localConn.add(new ConnectionJsonPresenter(numLineConnected,nameConnected));
             }
             connections.add(localConn);
         }
@@ -108,5 +111,3 @@ public class MskSubway {
         fw.close();
     }
 }
-
-
