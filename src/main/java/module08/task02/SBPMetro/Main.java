@@ -14,6 +14,7 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.Scanner;
 
 public class Main {
@@ -21,10 +22,13 @@ public class Main {
     private static final Marker INPUT_HISTORY_MARKER = MarkerManager.getMarker("INPUT_HISTORY");
     private static final Marker INVALID_STATIONS_MARKER = MarkerManager.getMarker("INVALID_STATIONS");
 
-    private static String dataFile = "src/main/resources/map.json";
+    private static String dataFile = "src/main/resources/Moscow.json";
     private static Scanner scanner;
     private static StationIndex stationIndex;
 
+    public Main(String path){
+        dataFile=path;
+    }
     public static void main(String[] args) {
         RouteCalculator calculator = getRouteCalculator();
 
