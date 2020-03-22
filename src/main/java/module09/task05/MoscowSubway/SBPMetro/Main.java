@@ -1,7 +1,7 @@
-package module08.task02.SBPMetro;
+package SBPMetro;
 
-import module08.task02.SBPMetro.core.Line;
-import module08.task02.SBPMetro.core.Station;
+import SBPMetro.core.Line;
+import SBPMetro.core.Station;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.apache.logging.log4j.Marker;
@@ -14,7 +14,6 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 import java.util.Scanner;
 
 public class Main {
@@ -22,7 +21,7 @@ public class Main {
     private static final Marker INPUT_HISTORY_MARKER = MarkerManager.getMarker("INPUT_HISTORY");
     private static final Marker INVALID_STATIONS_MARKER = MarkerManager.getMarker("INVALID_STATIONS");
 
-    private static String dataFile = "src/main/resources/Moscow.json";
+    private static String dataFile = "src/main/resources/09_FilesAndNetwork/files/map.json";
     private static Scanner scanner;
     private static StationIndex stationIndex;
 

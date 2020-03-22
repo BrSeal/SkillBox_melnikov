@@ -1,4 +1,4 @@
-package module08.task02.SBPMetro.Exceptions;
+package module09.task05.MoscowSubway.SBPMetro.Exceptions;
 
 public class RouteHasNullElementsException extends NullPointerException {
 }

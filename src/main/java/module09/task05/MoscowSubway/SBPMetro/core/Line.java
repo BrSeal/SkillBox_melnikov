@@ -1,4 +1,4 @@
-package module08.task02.SBPMetro.core;
+package module09.task05.MoscowSubway.SBPMetro.core;
 
 import java.util.ArrayList;
 import java.util.List;
