@@ -10,13 +10,6 @@
         <module>09_FilesAndNetwork/MosMetro</module>
         <module>Modules 01-08</module>
     </modules>
-    <repositories>
-        <repository>
-            <id>localrep</id>
-            <name>local repository</name>
-            <url>file:${project.basedir}/lib</url>
-        </repository>
-    </repositories>
     <build>
         <plugins>
             <plugin>
@@ -39,11 +32,6 @@
     </build>
 
     <dependencies>
-        <dependency>
-            <groupId>com.Skillbox</groupId>
-            <artifactId>airport</artifactId>
-            <version>1.0.1</version>
-        </dependency>
         <dependency>
             <groupId>org.junit.platform</groupId>
         <artifactId>junit-platform-launcher</artifactId>

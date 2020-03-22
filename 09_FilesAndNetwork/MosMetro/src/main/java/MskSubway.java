@@ -115,7 +115,8 @@ public class MskSubway
 	
 	public void toJson(Object o, String path) throws IOException {
 		Gson gson = new GsonBuilder().setPrettyPrinting().create();
-		FileWriter fw = new FileWriter(path);
+		File output=new File(path);
+		FileWriter fw = new FileWriter(output);
 		gson.toJson(o, fw);
 		fw.flush();
 		fw.close();
