@@ -8,6 +8,7 @@
 
     <modules>
         <module>09_FilesAndNetwork/MosMetro</module>
+        <module>Modules 01-08</module>
     </modules>
     <repositories>
         <repository>

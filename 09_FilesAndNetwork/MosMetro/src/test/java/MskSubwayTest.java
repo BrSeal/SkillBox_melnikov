@@ -6,7 +6,7 @@ class MskSubwayTest {
     @Test
     void parse() throws IOException {
         MskSubway s = new MskSubway();
-        s.parse("resources/MetroMsk.html");
+        s.parse("src/main/java/resources/MetroMsk.html");
         s.toJson(s, "resources/Moscow.json");
     
         Main metro=new Main("resources/Moscow.json");
