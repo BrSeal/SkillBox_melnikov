@@ -8,6 +8,7 @@
 
     <modules>
         <module>09_FilesAndNetwork/MosMetro</module>
+        <module>10_SQLAndHibernate/JDBC-exp</module>
         <module>Modules 01-08</module>
     </modules>
     <build>
