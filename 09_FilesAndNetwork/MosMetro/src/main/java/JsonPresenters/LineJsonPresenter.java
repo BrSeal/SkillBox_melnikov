@@ -1,4 +1,4 @@
-package module09.task05.MoscowSubway.JsonPresenters;
+package JsonPresenters;
 
 public class LineJsonPresenter implements Comparable {
     private String color;

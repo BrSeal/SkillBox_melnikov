@@ -34,7 +34,7 @@ public class Main {
         stationIndex.addLine(newLine);
         stationIndex.addStation(new Station("Новая", newLine));
 
-        System.out.println("Программа расчёта маршрутов метрополитена Санкт-Петербурга\n");
+        System.out.println("Программа расчёта маршрутов метрополитена\n");
         scanner = new Scanner(System.in);
 
         String fromN = "", toN = "";

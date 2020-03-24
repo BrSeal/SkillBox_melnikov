@@ -1,7 +1,7 @@
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import module09.task05.MoscowSubway.JsonPresenters.ConnectionJsonPresenter;
-import module09.task05.MoscowSubway.JsonPresenters.LineJsonPresenter;
+import JsonPresenters.ConnectionJsonPresenter;
+import JsonPresenters.LineJsonPresenter;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;

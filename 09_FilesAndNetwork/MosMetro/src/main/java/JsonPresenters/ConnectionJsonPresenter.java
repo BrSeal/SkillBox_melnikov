@@ -1,4 +1,4 @@
-package module09.task05.MoscowSubway.JsonPresenters;
+package JsonPresenters;
 
 public class ConnectionJsonPresenter implements Comparable {
     private String station;
