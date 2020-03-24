@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="c7e8c104-f542-4537-9ba5-8bb98ca92ac0" name="Default Changelist" comment="Немного поправлено дерево наследования maven">
+      <change afterPath="$PROJECT_DIR$/.idea/.name" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__com_Skillbox_airport_1_0_1.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__com_google_code_gson_gson_2_8_6.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__com_google_protobuf_protobuf_java_3_6_1.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__com_googlecode_json_simple_json_simple_1_1_1.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__commons_io_commons_io_2_6.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__junit_junit_4_13.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__mysql_mysql_connector_java_8_0_19.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_apache_logging_log4j_log4j_api_2_13_0.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_apache_logging_log4j_log4j_core_2_13_0.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_apiguardian_apiguardian_api_1_1_0.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_hamcrest_hamcrest_core_1_3.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_json_json_20190722.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_jsoup_jsoup_1_12_2.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_junit_jupiter_junit_jupiter_api_5_6_0.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_junit_jupiter_junit_jupiter_engine_5_6_0.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_junit_platform_junit_platform_commons_1_6_0.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_junit_platform_junit_platform_engine_1_6_0.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_junit_platform_junit_platform_launcher_1_6_0.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_junit_vintage_junit_vintage_engine_5_6_0.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_opentest4j_opentest4j_1_2_0.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/09_FilesAndNetwork/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/09_FilesAndNetwork/09_FilesAndNetwork.iml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/09_FilesAndNetwork/MosMetro/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/09_FilesAndNetwork/MosMetro/MosMetro.iml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/10_SQLAndHibernate/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/10_SQLAndHibernate/10_SQLAndHibernate.iml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/10_SQLAndHibernate/JDBC-exp/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/10_SQLAndHibernate/JDBC-exp/JDBC-exp.iml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Modules 01-08/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Modules 01-08/skillbox_melnikov_modules01-09.iml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/skillbox_melnikov.iml" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="ProjectId" id="1ZZIwyrqvmCsFdLYd9erIaTE8DD" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showExcludedFiles" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+  </component>
+  <component name="ServiceViewManager">
+    <option name="viewStates">
+      <list>
+        <serviceView>
+          <treeState>
+            <expand />
+            <select />
+          </treeState>
+        </serviceView>
+      </list>
+    </option>
+  </component>
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="c7e8c104-f542-4537-9ba5-8bb98ca92ac0" name="Default Changelist" comment="" />
+      <created>1585040431411</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1585040431411</updated>
+    </task>
+    <task id="LOCAL-00001" summary="Немного поправлено дерево наследования maven">
+      <created>1585041061552</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1585041061552</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
+    <servers />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="Немного поправлено дерево наследования maven" />
+    <option name="LAST_COMMIT_MESSAGE" value="Немного поправлено дерево наследования maven" />
+  </component>
+  <component name="WindowStateProjectService">
+    <state x="240" y="87" key="CommitChangelistDialog2" timestamp="1585041105055">
+      <screen x="0" y="0" width="1280" height="984" />
+    </state>
+    <state x="240" y="87" key="CommitChangelistDialog2/0.0.1280.984@0.0.1280.984" timestamp="1585041105055" />
+    <state width="1237" height="263" key="GridCell.Tab.0.bottom" timestamp="1585041028079">
+      <screen x="0" y="0" width="1280" height="984" />
+    </state>
+    <state width="1237" height="263" key="GridCell.Tab.0.bottom/0.0.1280.984@0.0.1280.984" timestamp="1585041028079" />
+    <state width="1237" height="263" key="GridCell.Tab.0.center" timestamp="1585041028079">
+      <screen x="0" y="0" width="1280" height="984" />
+    </state>
+    <state width="1237" height="263" key="GridCell.Tab.0.center/0.0.1280.984@0.0.1280.984" timestamp="1585041028079" />
+    <state width="1237" height="263" key="GridCell.Tab.0.left" timestamp="1585041028079">
+      <screen x="0" y="0" width="1280" height="984" />
+    </state>
+    <state width="1237" height="263" key="GridCell.Tab.0.left/0.0.1280.984@0.0.1280.984" timestamp="1585041028079" />
+    <state width="1237" height="263" key="GridCell.Tab.0.right" timestamp="1585041028079">
+      <screen x="0" y="0" width="1280" height="984" />
+    </state>
+    <state width="1237" height="263" key="GridCell.Tab.0.right/0.0.1280.984@0.0.1280.984" timestamp="1585041028079" />
+  </component>
+</project>

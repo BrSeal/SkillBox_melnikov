@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CompilerConfiguration">
+    <bytecodeTargetLevel>
+      <module name="09_FilesAndNetwork" target="1.8" />
+      <module name="10_SQLAndHibernate" target="1.8" />
+      <module name="JDBC-exp" target="1.9" />
+      <module name="MosMetro" target="1.8" />
+      <module name="skillbox_melnikov" target="1.8" />
+      <module name="skillbox_melnikov_modules01-09" target="1.9" />
+    </bytecodeTargetLevel>
+  </component>
+</project>

@@ -1,15 +1,18 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
     <modelVersion>4.0.0</modelVersion>
-    <artifactId>MosMetro</artifactId>
+    <artifactId>09_FilesAndNetwork</artifactId>
     <packaging>pom</packaging>
     <version>1.0-SNAPSHOT</version>
 
     <parent>
         <groupId>Study</groupId>
-        <artifactId>09_FilesAndNetwork</artifactId>
+        <artifactId>skillbox_melnikov</artifactId>
         <version>1.0-SNAPSHOT</version>
     </parent>
+    <modules>
+        <module>MosMetro</module>
+    </modules>
     <build>
         <plugins>
             <plugin>
