@@ -9,8 +9,8 @@ class JDBCexpTest
 {
 	String user="root";
 	String pass="root";
-	String url="jdbc:mysql://localhost:3306/skillbox?characterEncoding=utf8&serverTimezone=UTC";
-	String query="select * from students";
+	String url="jdbc:mysql://localhost:3306/skillbox?serverTimezone=UTC";
+	String query="select * from courses";
 	@Test
 	void query() throws SQLException {
 		JDBCexp db=new JDBCexp(url,user,pass);
@@ -18,7 +18,6 @@ class JDBCexpTest
 		while (result.next()){
 			System.out.println(result.getString("name"));
 		}
-		
 		db.close();
 	}
 }
