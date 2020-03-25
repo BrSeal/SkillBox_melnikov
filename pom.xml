@@ -8,8 +8,6 @@
 
     <modules>
         <module>Modules 01-08</module>
-        <module>09_FilesAndNetwork</module>
-        <module>10_SQLAndHibernate</module>
     </modules>
     <build>
         <plugins>
