@@ -37,6 +37,9 @@
         public void setRegistration_date(Date registration_date) {
             this.registration_date = registration_date;
         }
-
-
+    
+        @Override
+        public String toString() {
+            return name +", " + age + " лет, зарегистрировался " + registration_date;
+        }
     }

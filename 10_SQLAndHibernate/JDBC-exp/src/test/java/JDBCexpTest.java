@@ -35,14 +35,14 @@ class JDBCexpTest {
 		но группировку по месяцам можно реализовать и с помощью Java.
 		 */
         query = "SELECT DISTINCT course_name," +
-                "COUNT(subscription_date)/ COUNT(MONTH( subscription_date)) AS avg_per_month\n" +
+                "COUNT(student_name)/ COUNT(MONTH( subscription_date)) AS avg_per_month\n" +
                 "FROM purchaselist\n" +
                 "GROUP BY course_name\n" +
                 "ORDER BY course_name";
 
         ResultSet result = db.query(query);
         while (result.next()) {
-            System.out.println(result.getString("course_name") +
+            System.out.println(result.getString("course_name") +" "+
                     result.getString("avg_per_month"));
         }
         db.close();
