@@ -7,6 +7,11 @@ import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 
 public class HibernateExp {
     private static Session session;
+
+    public static Session getSession() {
+        return session;
+    }
+
     private static SessionFactory sessionFactory;
 
 private static HibernateExp instance;
