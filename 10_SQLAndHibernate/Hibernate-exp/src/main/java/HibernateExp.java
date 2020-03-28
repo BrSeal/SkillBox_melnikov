@@ -20,15 +20,15 @@ public class HibernateExp
 		return session;
 	}
 	
+	public static void close() {
+		session.close();
+		sessionFactory.close();
+	}
+	
 	private void init() {
 		StandardServiceRegistry reg = new StandardServiceRegistryBuilder().configure("hibernate.cfg.xml").build();
 		Metadata metadata = new MetadataSources(reg).getMetadataBuilder().build();
 		sessionFactory = metadata.getSessionFactoryBuilder().build();
 		session = sessionFactory.openSession();
-	}
-	
-	public static void close() {
-		session.close();
-		sessionFactory.close();
 	}
 }

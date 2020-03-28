@@ -1,45 +1,28 @@
-    package Tables;
+package Tables;
 
-    import javax.persistence.*;
-    import java.util.Date;
+import lombok.Data;
 
-    @Entity
+import javax.persistence.*;
+import java.util.Date;
+import java.util.List;
 
-    @Table(name = "students")
-    public class Student {
-        @Id
-        @GeneratedValue(strategy = GenerationType.IDENTITY)
-        private int id;
-        String name;
-        int age;
-        Date registration_date;
-
-        public String getName() {
-            return name;
-        }
-
-        public void setName(String name) {
-            this.name = name;
-        }
-
-        public int getAge() {
-            return age;
-        }
-
-        public void setAge(int age) {
-            this.age = age;
-        }
-
-        public Date getRegistration_date() {
-            return registration_date;
-        }
-
-        public void setRegistration_date(Date registration_date) {
-            this.registration_date = registration_date;
-        }
-    
-        @Override
-        public String toString() {
-            return name +", " + age + " лет, зарегистрировался " + registration_date;
-        }
-    }
+@Entity
+@Table (name = "students")
+@Data
+public class Student
+{
+	@Id
+	@GeneratedValue (strategy = GenerationType.IDENTITY)
+	private int id;
+	private String name;
+	private Integer age;
+	private Date registration_date;
+	
+	@ManyToMany (cascade = CascadeType.ALL)
+	@JoinTable (name = "subscriptions", joinColumns = { @JoinColumn (name = "student_id") }, inverseJoinColumns = { @JoinColumn (name = "course_id") })
+	private List<Course> courses;
+	
+	public String toString() {
+		return id + " " + name + " " + age + " " + registration_date;
+	}
+}

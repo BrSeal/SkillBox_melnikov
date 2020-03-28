@@ -21,5 +21,8 @@
 
         <mapping class="Tables.Course"></mapping>
         <mapping class="Tables.Student"></mapping>
+        <mapping class="Tables.Teacher"></mapping>
+        <mapping class="Tables.Subscription"></mapping>
+        <mapping class="Tables.PurchaseList"></mapping>
     </session-factory>
 </hibernate-configuration>
