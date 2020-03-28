@@ -1,5 +1,6 @@
 package Tables;
 
+import Tables.PrimaryKeys.SubscriptionPK;
 import lombok.Data;
 
 import javax.persistence.Entity;
@@ -10,7 +11,7 @@ import java.util.Date;
 
 @Entity
 @Table (name = "subscriptions")
-@IdClass (Tables.CompositeKey.class)
+@IdClass (SubscriptionPK.class)
 @Data
 public class Subscription
 {
