@@ -25,7 +25,7 @@ public class HibernateExp
 		sessionFactory.close();
 	}
 	
-	private void init() {
+	private static void init() {
 		StandardServiceRegistry reg = new StandardServiceRegistryBuilder().configure("hibernate.cfg.xml").build();
 		Metadata metadata = new MetadataSources(reg).getMetadataBuilder().build();
 		sessionFactory = metadata.getSessionFactoryBuilder().build();

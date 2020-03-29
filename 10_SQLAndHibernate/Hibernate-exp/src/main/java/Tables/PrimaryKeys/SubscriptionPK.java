@@ -1,20 +1,26 @@
 package Tables.PrimaryKeys;
 
+import Tables.Course;
+import Tables.Student;
 import lombok.Data;
 
+import javax.persistence.*;
 import java.io.Serializable;
 
+@Embeddable
 @Data
 public class SubscriptionPK implements Serializable
 {
-	private Integer student_id;
-	private Integer course_id;
+	@OneToOne
+	private Student student;
+	@OneToOne
+	private Course course;
 	
 	public SubscriptionPK() {
 	}
 	
-	public SubscriptionPK(Integer student_id, Integer course_id) {
-		this.student_id = student_id;
-		this.course_id = course_id;
+	public SubscriptionPK(Student student, Course course) {
+		this.student = student;
+		this.course = course;
 	}
 }

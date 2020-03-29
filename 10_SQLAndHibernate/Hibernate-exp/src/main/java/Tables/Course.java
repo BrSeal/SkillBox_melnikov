@@ -22,7 +22,7 @@ public class Course
 	private Integer duration;
 	private String description;
 	
-	@ManyToOne (cascade = CascadeType.ALL)
+	@ManyToOne (cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 	private Teacher teacher;
 	
 	private Integer students_count;
