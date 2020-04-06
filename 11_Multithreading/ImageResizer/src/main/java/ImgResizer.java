@@ -1,5 +1,6 @@
+import org.imgscalr.Scalr;
+
 import javax.imageio.ImageIO;
-import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.File;
 
@@ -14,7 +15,7 @@ public class ImgResizer implements Runnable
 		this.files = files;
 		this.dstFolder = dstFolder;
 		this.start = start;
-		this.newWidth = newWidth * 4;
+		this.newWidth = newWidth*4;
 	}
 	
 	@Override
@@ -26,46 +27,26 @@ public class ImgResizer implements Runnable
 					continue;
 				}
 				
-				int newHeight = (int) Math.round(image.getHeight() / (image.getWidth() / (double) newWidth));
-				BufferedImage newImage = new BufferedImage(newWidth, newHeight, BufferedImage.TYPE_INT_RGB);
+				double proportion =(double)image.getWidth() / newWidth;
 				
-				int widthStep = image.getWidth() / newWidth;
-				int heightStep = image.getHeight() / newHeight;
+				int newHeight = (int) Math.round(image.getHeight() / proportion);
+				BufferedImage newImage = new BufferedImage(newWidth, newHeight, BufferedImage.TYPE_INT_RGB);
 				
 				for (int x = 0; x < newWidth; x++) {
 					for (int y = 0; y < newHeight; y++) {
-						int rgb = image.getRGB(x * widthStep, y * heightStep);
+						int rgb = image.getRGB((int)Math.round(x * proportion), (int)Math.round(y * proportion));
 						newImage.setRGB(x, y, rgb);
 					}
 				}
-				BufferedImage finalResult = toBufferedImage(
-						newImage
-						.getScaledInstance(newWidth/4, newHeight/4, Image.SCALE_SMOOTH)
-				);
 				
 				File newFile = new File(dstFolder + "/" + file.getName());
-				
-				ImageIO.write(finalResult, "jpg", newFile);
+				newImage= Scalr.resize(newImage, Scalr.Method.ULTRA_QUALITY,newWidth/4,newHeight/4);
+				ImageIO.write(newImage, "jpg", newFile);
 			}
 		}catch (Exception ex) {
 			ex.printStackTrace();
 		}
 		System.out.println("Duration: " + (System.currentTimeMillis() - start));
 		
-		
-	}
-	
-	private static BufferedImage toBufferedImage(Image img) {
-		if (img instanceof BufferedImage) {
-			return (BufferedImage) img;
-		}
-		
-		BufferedImage bimage = new BufferedImage(img.getWidth(null), img.getHeight(null), BufferedImage.TYPE_INT_RGB);
-		
-		Graphics2D bGr = bimage.createGraphics();
-		bGr.drawImage(img, 0, 0, null);
-		bGr.dispose();
-		
-		return bimage;
 	}
 }
