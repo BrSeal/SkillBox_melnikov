@@ -28,20 +28,12 @@ public class ImgResizer implements Runnable
 				}
 				
 				double proportion =(double)image.getWidth() / newWidth;
-				
 				int newHeight = (int) Math.round(image.getHeight() / proportion);
-				BufferedImage newImage = new BufferedImage(newWidth, newHeight, BufferedImage.TYPE_INT_RGB);
 				
-				for (int x = 0; x < newWidth; x++) {
-					for (int y = 0; y < newHeight; y++) {
-						int rgb = image.getRGB((int)Math.round(x * proportion), (int)Math.round(y * proportion));
-						newImage.setRGB(x, y, rgb);
-					}
-				}
-				
+				image=Scalr.resize(image, Scalr.Method.SPEED,newWidth,newHeight);
+				image= Scalr.resize(image, Scalr.Method.ULTRA_QUALITY,newWidth/4,newHeight/4);
 				File newFile = new File(dstFolder + "/" + file.getName());
-				newImage= Scalr.resize(newImage, Scalr.Method.ULTRA_QUALITY,newWidth/4,newHeight/4);
-				ImageIO.write(newImage, "jpg", newFile);
+				ImageIO.write(image, "jpg", newFile);
 			}
 		}catch (Exception ex) {
 			ex.printStackTrace();
