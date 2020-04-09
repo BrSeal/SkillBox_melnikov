@@ -33,16 +33,20 @@ public class Bank
 	 * счетов (как – на ваше усмотрение)
 	 */
 	
-	public synchronized void transfer(String fromAccountNum, String toAccountNum, long amount) throws InterruptedException, BlockedAccountException, NoEnoughMoneyException, IllegalArgumentException {
+	public void transfer(String fromAccountNum, String toAccountNum, long amount) throws InterruptedException, BlockedAccountException, NoEnoughMoneyException, IllegalArgumentException {
 		if (fromAccountNum.equals(toAccountNum)) { throw new IllegalArgumentException(SAME_ACC_ERR); }
 		Account from = accounts.get(fromAccountNum);
 		Account to = accounts.get(toAccountNum);
-		from.withdraw(amount);
-		to.deposit(amount);
 		
-		if (amount > 50000 && isFraud(fromAccountNum, toAccountNum, amount)) {
-			from.setBlocked(true);
-			to.setBlocked(true);
+		synchronized (from.compareTo(to)>0?from:to) {
+			synchronized (from.compareTo(to)>0?to:from) {
+				from.withdraw(amount);
+				to.deposit(amount);
+				if (amount > 50000 && isFraud(fromAccountNum, toAccountNum, amount)) {
+					from.setBlocked(true);
+					to.setBlocked(true);
+				}
+			}
 		}
 	}
 	
@@ -54,19 +58,15 @@ public class Bank
 		return accounts.get(accountNum).getMoney();
 	}
 	
-	public synchronized String addAccount(long amount) {
-		
+	public synchronized void addAccount(long amount) {
 		Account account = new Account(COUNT.toString(), amount);
 		accounts.put(account.getAccNumber(), account);
 		COUNT.incrementAndGet();
-		return account.getAccNumber();
 	}
 	
-	public synchronized long getTotalMoneyPool() {
+	public long getTotalMoneyPool() {
 		long res = 0;
-		for (Map.Entry<String, Account> a : accounts.entrySet()) {
-			res += a.getValue().getMoney();
-		}
+			for (Map.Entry<String, Account> a : accounts.entrySet()) res += a.getValue().getMoney();
 		return res;
 	}
 }
