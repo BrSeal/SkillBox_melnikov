@@ -11,6 +11,9 @@ public class Bank
 {
 	private static final AtomicInteger COUNT = new AtomicInteger(0);
 	private static final String SAME_ACC_ERR = "You can't transfer money to the same account!";
+	private static final String ZERO_OR_LESS_ERR = "Transfer amount can't be 0 or less!";
+	private static final String BLOCKED_ERR = " Account is blocked!";
+	private static final String NO_MONEY_ERR = " Not enough money!";
 	
 	@Getter
 	private ConcurrentHashMap<String, Account> accounts;
@@ -33,19 +36,25 @@ public class Bank
 	 * счетов (как – на ваше усмотрение)
 	 */
 	
-	public void transfer(String fromAccountNum, String toAccountNum, long amount) throws InterruptedException, BlockedAccountException, NoEnoughMoneyException, IllegalArgumentException {
+	public void transfer(String fromAccountNum, String toAccountNum, long amount) throws InterruptedException, BlockedAccountException, NoEnoughMoneyException {
+		
 		if (fromAccountNum.equals(toAccountNum)) { throw new IllegalArgumentException(SAME_ACC_ERR); }
+		if (amount <= 0) { throw new IllegalArgumentException(ZERO_OR_LESS_ERR); }
 		Account from = accounts.get(fromAccountNum);
 		Account to = accounts.get(toAccountNum);
 		
-		synchronized (from.compareTo(to)>0?from:to) {
-			synchronized (from.compareTo(to)>0?to:from) {
-				from.withdraw(amount);
-				to.deposit(amount);
+		synchronized (from.compareTo(to) > 0 ? from : to) {
+			synchronized (from.compareTo(to) > 0 ? to : from) {
+				if (from.isBlocked()) { throw new BlockedAccountException(from.getAccNumber() + BLOCKED_ERR); }
+				if (to.isBlocked()) { throw new BlockedAccountException(to.getAccNumber() + BLOCKED_ERR); }
+				if (from.getMoney() < amount) { throw new NoEnoughMoneyException(from.getAccNumber() + NO_MONEY_ERR); }
+				
 				if (amount > 50000 && isFraud(fromAccountNum, toAccountNum, amount)) {
 					from.setBlocked(true);
 					to.setBlocked(true);
 				}
+				from.withdraw(amount);
+				to.deposit(amount);
 			}
 		}
 	}
@@ -55,18 +64,21 @@ public class Bank
 	 */
 	
 	public long getBalance(String accountNum) {
-		return accounts.get(accountNum).getMoney();
+		Account acc = accounts.get(accountNum);
+		synchronized (acc) {
+			return acc.getMoney();
+		}
 	}
 	
-	public synchronized void addAccount(long amount) {
-		Account account = new Account(COUNT.toString(), amount);
-		accounts.put(account.getAccNumber(), account);
-		COUNT.incrementAndGet();
+	public void addAccount(long amount) {
+		int accNum = COUNT.getAndIncrement();
+		accounts.put(accNum + "", new Account(accNum + "", amount));
+		
 	}
 	
-	public long getTotalMoneyPool() {
+	public synchronized long getTotalMoneyPool() {
 		long res = 0;
-			for (Map.Entry<String, Account> a : accounts.entrySet()) res += a.getValue().getMoney();
+		for (Map.Entry<String, Account> a : accounts.entrySet()) res += a.getValue().getMoney();
 		return res;
 	}
 }

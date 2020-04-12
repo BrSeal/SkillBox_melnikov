@@ -2,66 +2,62 @@ import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
 import java.util.Random;
-import java.util.Scanner;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class BankTest
 {
-	
 	@Test
-	void securityTest() {
+	void securityTest() throws InterruptedException {
+		int accCount = 100;
+		int threadCount = 10;
+		int transactionsPerThread = 100000;
+		int transferLimit=50100;
+		
 		Bank b = new Bank();
-		for (int i = 0; i < 100; i++) b.addAccount(10000);
+		for (int i = 0; i < accCount; i++) b.addAccount(10000);
+		long totalCash = b.getTotalMoneyPool();
 		
 		ArrayList<Thread> threads = new ArrayList<>();
-		for (int i = 0; i < Runtime.getRuntime().availableProcessors(); i++) {
+		for (int i = 0; i < threadCount; i++) {
 			threads.add(new Thread(() -> {
 				Random r = new Random();
-				
-				for (int qwe = 0; qwe < 100000; qwe++) {
-					String fromAcc = r.nextInt(99) + "";
-					String toAcc = r.nextInt(99) + "";
+				for (int j = 0; j < transactionsPerThread; j++) {
+					String fromAcc = r.nextInt(accCount-1) + "";
+					String toAcc = r.nextInt(accCount-1) + "";
 					try {
-						b.transfer(fromAcc, toAcc, 100);
-						Thread.sleep(0);
-					}catch (Exception ex) {
-						System.out.println(ex.getMessage());
-					}
-					if (b.getTotalMoneyPool() != 1000000) {
-						System.out.println("Something gone wrong with money pool " + b.getTotalMoneyPool());
-					}
+						b.transfer(fromAcc, toAcc, r.nextInt(transferLimit));
+					}catch (Exception e) {}
 				}
 			}));
 		}
 		
 		threads.forEach(Thread::start);
-		Scanner s = new Scanner(System.in);
-		s.nextLine();
-		threads.forEach(Thread::interrupt);
+		for (Thread thread : threads) thread.join();
+		
+		assertEquals(totalCash, b.getTotalMoneyPool());
 	}
 	
 	@Test
-	void testAccounts() {
+	void accCreateTest() throws Exception {
+		int threadCount = 100;
+		int accsPerThread = 10000;
+		int expected = threadCount * accsPerThread;
+		
+		
+		Bank b = new Bank();
 		ArrayList<Thread> threads = new ArrayList<>();
-		for (int i = 0; i < 100; i++) {
+		for (int i = 0; i < threadCount; i++) {
 			threads.add(new Thread(() -> {
-				Random r=new Random();
-				Account from = new Account(r.nextInt(10000)+"", 1_000_000_000);
-				Account to = new Account(r.nextInt(10000)+"", 0);
-				Object o = new Object();
-				
-				for (int j = 0; j < 1_000_000_000; j++) {
-					synchronized (o) {
-						try {
-							from.withdraw(1000);
-							to.deposit(1000);
-						}catch (Exception e) {
-							System.out.println(e.getMessage());
-						}
-					}
+				Random r = new Random();
+				for (int j = 0; j < accsPerThread; j++) {
+					b.addAccount(10000 + r.nextInt(10000));
 				}
-				System.out.println(from.getMoney() != 0 ? "Fail" : "");
 			}));
 		}
+		
 		threads.forEach(Thread::start);
+		for (Thread thread : threads) thread.join();
+		assertEquals(expected, b.getAccounts().size());
 	}
 }
