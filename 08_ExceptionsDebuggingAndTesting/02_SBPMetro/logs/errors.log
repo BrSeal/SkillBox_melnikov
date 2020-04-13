@@ -1,0 +1,7 @@
+13.04.2020 18:47:17 [main] 
+Станция отправления: Садовая
+Станция назначения: Новая
+Exceptions.NoRouteException: null
+	at RouteCalculator.getRouteWithTwoConnections(RouteCalculator.java:139) ~[classes/:?]
+	at RouteCalculator.getShortestRoute(RouteCalculator.java:33) ~[classes/:?]
+	at Main.main(Main.java:49) [classes/:?]
