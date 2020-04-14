@@ -3,7 +3,6 @@ import Exceptions.NoEnoughMoneyException;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-
 import java.util.ArrayList;
 import java.util.Random;
 
@@ -16,13 +15,15 @@ class BankTest
 	int accCount = 100;
 	int threadCount = 10;
 	int transactionsPerThread = 100000;
-	int transferLimit=50100;
+	int transferLimit = 50100;
+	
 	@BeforeEach
-	void init(){
-		b=new Bank();
+	void init() {
+		b = new Bank();
 		b.addAccount(10000);
 		b.addAccount(10000);
 	}
+	
 	@Test
 	void securityTest() throws InterruptedException {
 		for (int i = 0; i < accCount; i++) b.addAccount(10000);
@@ -33,8 +34,8 @@ class BankTest
 			threads.add(new Thread(() -> {
 				Random r = new Random();
 				for (int j = 0; j < transactionsPerThread; j++) {
-					String fromAcc = r.nextInt(accCount-1) + "";
-					String toAcc = r.nextInt(accCount-1) + "";
+					String fromAcc = r.nextInt(accCount - 1) + "";
+					String toAcc = r.nextInt(accCount - 1) + "";
 					try {
 						b.transfer(fromAcc, toAcc, r.nextInt(transferLimit));
 					}catch (Exception e) {}
@@ -72,42 +73,34 @@ class BankTest
 	}
 	
 	@Test
-	void transferFromBlocked0(){
+	void transferFromBlocked0() {
 		b.getAccount("0").setBlocked(true);
-		assertThrows(BlockedAccountException.class,()->{
-			b.transfer("0","1",1000);
-		});
-		assertEquals(b.getBalance("0"),10000);
-		assertEquals(b.getBalance("1"),10000);
+		assertThrows(BlockedAccountException.class, () -> b.transfer("0", "1", 1000));
+		assertEquals(b.getBalance("0"), 10000);
+		assertEquals(b.getBalance("1"), 10000);
 	}
 	
 	@Test
-	void transferToBlocked(){
+	void transferToBlocked() {
 		b.getAccount("1").setBlocked(true);
-		assertThrows(BlockedAccountException.class,()->{
-			b.transfer("0","1",1000);
-		});
-		assertEquals(b.getBalance("0"),10000);
-		assertEquals(b.getBalance("1"),10000);
+		assertThrows(BlockedAccountException.class, () -> b.transfer("0", "1", 1000));
+		assertEquals(b.getBalance("0"), 10000);
+		assertEquals(b.getBalance("1"), 10000);
 	}
 	
 	@Test
-	void transferBiggerAmountOfMoney(){
-		assertThrows(NoEnoughMoneyException.class,()->{
-			b.transfer("0","1",20000);
-		});
-		assertEquals(b.getBalance("0"),10000);
-		assertEquals(b.getBalance("1"),10000);
+	void transferBiggerAmountOfMoney() {
+		assertThrows(NoEnoughMoneyException.class, () -> b.transfer("0", "1", 20000));
+		assertEquals(b.getBalance("0"), 10000);
+		assertEquals(b.getBalance("1"), 10000);
 	}
 	
 	@Test
-	void transferFromBlocked1(){
+	void transferFromBlocked1() {
 		b.getAccount("0 ").setBlocked(true);
-		assertThrows(BlockedAccountException.class,()->{
-			b.transfer("0","1",1000000);
-		});
-		assertEquals(b.getBalance("0"),10000);
-		assertEquals(b.getBalance("1"),10000);
+		assertThrows(BlockedAccountException.class, () -> b.transfer("0", "1", 1000000));
+		assertEquals(b.getBalance("0"), 10000);
+		assertEquals(b.getBalance("1"), 10000);
 	}
 	
 	
