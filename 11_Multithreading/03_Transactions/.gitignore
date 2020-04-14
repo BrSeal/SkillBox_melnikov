@@ -2,4 +2,5 @@
 /out/
 *.iml
 /target/
+/META-INF/
 .DS_Store

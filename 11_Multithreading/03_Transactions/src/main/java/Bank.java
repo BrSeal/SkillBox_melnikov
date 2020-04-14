@@ -46,15 +46,21 @@ public class Bank
 		synchronized (from.compareTo(to) > 0 ? from : to) {
 			synchronized (from.compareTo(to) > 0 ? to : from) {
 				if (from.isBlocked()) { throw new BlockedAccountException(from.getAccNumber() + BLOCKED_ERR); }
-				if (to.isBlocked()) { throw new BlockedAccountException(to.getAccNumber() + BLOCKED_ERR); }
 				if (from.getMoney() < amount) { throw new NoEnoughMoneyException(from.getAccNumber() + NO_MONEY_ERR); }
 				
+				from.withdraw(amount);
 				if (amount > 50000 && isFraud(fromAccountNum, toAccountNum, amount)) {
+					from.deposit(amount);
 					from.setBlocked(true);
 					to.setBlocked(true);
 				}
-				from.withdraw(amount);
-				to.deposit(amount);
+				else {
+					if (to.isBlocked()) {
+						from.deposit(amount);
+						throw new BlockedAccountException(to.getAccNumber() + BLOCKED_ERR);
+					}
+					else { to.deposit(amount); }
+				}
 			}
 		}
 	}
@@ -74,6 +80,10 @@ public class Bank
 		int accNum = COUNT.getAndIncrement();
 		accounts.put(accNum + "", new Account(accNum + "", amount));
 		
+	}
+	
+	public Account getAccount(String key) {
+		return accounts.get(key);
 	}
 	
 	public synchronized long getTotalMoneyPool() {
