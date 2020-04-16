@@ -1,43 +1,40 @@
 import org.junit.jupiter.api.Test;
 
 import java.io.IOException;
-import java.util.List;
 
 class SiteMapTest
 {
+	SiteMap m;
 	
 	@Test
-	void getRefsSkillBox() throws IOException {
-		String url="http://skillbox.ru/";
-		List<String> links=SiteMap.getRefs(url);
-		links.forEach(System.out::println);
+	void jazzFriendsTest() throws IOException {
+		String url = "http://jazz-friends.ru/";
+		m = new SiteMap(url);
+		m.createSiteMap();
+		m.printSiteMap();
 	}
 	
 	@Test
-	void getRefsJazzFriends() throws IOException {
-		String url="http://jazz-friends.ru/";
-		List<String> links=SiteMap.getRefs(url);
-		links.forEach(System.out::println);
+	void lentaTest() throws IOException {
+		String url = "http://lenta.ru/";
+		m=new SiteMap(url);
+		m.createSiteMap();
+		m.printSiteMap();
 	}
 	
 	@Test
-	void getRefsJavaRush() throws IOException {
-		String url="https://javarush.ru/";
-		List<String> links=SiteMap.getRefs(url);
-		links.forEach(System.out::println);
+	void skillBoxTest() throws IOException {
+		String url = "http://skillbox.ru/";
+		m=new SiteMap(url);
+		m.createSiteMap();
+		m.printSiteMap();
 	}
 	
 	@Test
-	void getRefsLenta() throws IOException {
-		String url="https://lenta.ru";
-		List<String> links=SiteMap.getRefs(url);
-		links.forEach(System.out::println);
-	}
-	
-	@Test
-	void getRefsTProger() throws IOException {
-		String url="https://tproger.ru/";
-		List<String> links=SiteMap.getRefs(url);
-		links.forEach(System.out::println);
+	void tProggerTest() throws IOException {
+		String url = "http://tproger.ru/";
+		m=new SiteMap(url);
+		m.createSiteMap();
+		m.printSiteMap();
 	}
 }
