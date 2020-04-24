@@ -1,59 +1,80 @@
 import lombok.Getter;
+import lombok.Setter;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
+import org.jsoup.nodes.Element;
+import org.jsoup.select.Elements;
 
+import java.io.File;
+import java.io.FileWriter;
 import java.io.IOException;
-import java.util.Objects;
-import java.util.TreeSet;
-import java.util.stream.Collectors;
+import java.util.HashMap;
+import java.util.HashSet;
 
+@Getter
 public class SiteMap
 {
-	private static final char indentSymbol = '\t';
+	private static final String indentSymbol = "\t";
 	
-	@Getter
 	private String root;
+	@Setter
+	private String outputPath;
 	
-	@Getter
-	private TreeSet<String> links;
+	private HashMap<String, HashSet<String>> links;
+	private HashSet<String> allLinks;
 	
-	public SiteMap(String root) {
-		this.root = root;
-		links=new TreeSet<>();
+	public SiteMap(String rootUrl) {
+		root = rootUrl;
+		outputPath="out//"+root.split("/")[2]+".txt";
+		allLinks = new HashSet<>();
+		links = new HashMap<>();
 	}
 	
-	public TreeSet<String> getRefs(String url) throws IOException {
-		Document doc = Jsoup.connect(url).get();
+	public void createSiteMap(){
+		recursiveAddictionToMap(root);}
+	
+	private void recursiveAddictionToMap(String url){
+		if(links.containsKey(url)) return;
 		
-		return doc.select("a[href]")
-				  .stream()
-	  			  .map(e -> {
-			String link = e.attr("href");
-			if (!link.startsWith(url) && !link.startsWith("/") || !link.endsWith("/")) { return null; }
-			if (link.startsWith("/")) { return root + link.substring(1); }
-			return link;
-		})
-				  .filter(Objects::nonNull)
-				  .collect(Collectors.toCollection(TreeSet::new));
+		allLinks.add(url);
+		HashSet<String> refs = getRefs(url);
+		
+		links.put(url, refs);
+		for (String ref : refs) recursiveAddictionToMap(ref);
 	}
 	
-	public void createSiteMap() throws IOException{
-		createSiteMap(root);
+	public void printSiteMap() throws IOException {
+		FileWriter writer=new FileWriter(new File(outputPath),true);
+		recursivePrintWithIndent(root, "",writer);
+		writer.flush();
 	}
 	
-	private void createSiteMap(String url) throws IOException{
-		if(links.contains(url)) return;
-		links.add(url);
-		for (String link: getRefs(url))
-			createSiteMap(link);
+	private void recursivePrintWithIndent(String url, String indent,FileWriter writer) throws IOException {
+		writer.write(indent + url+"\n");
+		if(links.get(url).isEmpty()) return;
+		for (String link : links.get(url)) recursivePrintWithIndent(link, indent + indentSymbol,writer);
 	}
 	
-	public void printSiteMap(){
-		for (String link : links) {
-			int countIndent = -3;
-			for (char c : link.toCharArray()) if(c=='/') countIndent++;
-			for(int i=0;i<countIndent;i++) System.out.print(indentSymbol);
-			System.out.println(link);
+	public HashSet<String> getRefs(String url){
+		HashSet<String> result = new HashSet<>();
+		try {
+			Document doc = Jsoup.connect(url).maxBodySize(0).get();
+			Elements references = doc.select("a[href]");
+			
+			for (Element element : references) {
+				String absUrl = element.absUrl("href");
+				if (isValidUrl(absUrl) && !allLinks.contains(absUrl)) {
+					allLinks.add(absUrl);
+					result.add(absUrl);
+				}
+			}
+		}catch (Exception ex){
+			ex.printStackTrace();
 		}
+		return result;
+	}
+	
+	private boolean isValidUrl(String absUrl) {
+		return absUrl.startsWith(root) && absUrl.endsWith("/");
 	}
 }
