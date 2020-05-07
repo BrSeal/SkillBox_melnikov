@@ -12,7 +12,7 @@ public class ListController {
     public List<String> getAll() {
         return Storage.getTasks();
     }
-
+    
     @GetMapping("/{id}")
     public ResponseEntity<String> getByNumber(@PathVariable int id) {
         try {
@@ -21,13 +21,12 @@ public class ListController {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
         }
     }
-
-    @PostMapping("/")
-    public ResponseEntity<Integer> addToList(String data) {
-        if(data.isEmpty()) return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(null);
-        return new ResponseEntity<>(Storage.add(data),HttpStatus.OK);
+    
+    @PostMapping("/add")
+    public int addToList(String task) {
+        return Storage.add(task);
     }
-
+    
     @PatchMapping("/edit/{id}")
     public ResponseEntity edit(@PathVariable int id, String data) {
         try {
@@ -37,7 +36,7 @@ public class ListController {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
         }
     }
-
+    
     @PatchMapping("/moveUp/{id}")
     public ResponseEntity moveUp(@PathVariable int id) {
         synchronized (Storage.class) {
@@ -48,7 +47,7 @@ public class ListController {
         }
         return ResponseEntity.status(HttpStatus.OK).body(null);
     }
-
+    
     @PatchMapping("/moveDown/{id}")
     public ResponseEntity moveDown(@PathVariable int id) {
         synchronized (Storage.class) {
@@ -59,8 +58,8 @@ public class ListController {
         }
         return ResponseEntity.status(HttpStatus.OK).body(null);
     }
-
-    @DeleteMapping("/{id}")
+    
+    @DeleteMapping("/delete/{id}")
     public ResponseEntity<String> delete(@PathVariable int id) {
         try {
             return new ResponseEntity<>(Storage.delete(id), HttpStatus.OK);
@@ -68,7 +67,7 @@ public class ListController {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
         }
     }
-
+    
     private void swap(int a, int b) {
         synchronized (Storage.class) {
             String aValue = Storage.getById(a);
@@ -77,5 +76,5 @@ public class ListController {
             Storage.edit(b, aValue);
         }
     }
-
+    
 }
