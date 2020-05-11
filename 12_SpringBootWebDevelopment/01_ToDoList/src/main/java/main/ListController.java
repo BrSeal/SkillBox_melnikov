@@ -3,10 +3,12 @@ package main;
 import main.model.Task;
 import main.model.ToDoListRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.persistence.TypedQuery;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -31,42 +33,37 @@ public class ListController
 		return optionalTask.map(task -> new ResponseEntity<>(task, HttpStatus.OK)).orElseGet(() -> ResponseEntity.status(HttpStatus.NOT_FOUND).body(null));
 	}
 	
-	@PostMapping ("/add")
-	public int addToList(Task task) {
+	@PostMapping (value = "/add")
+	public int addToList(@RequestBody Task task) {
 		return repository.save(task).getId();
 	}
 	
 	@PatchMapping ("/edit/{id}")
-	public ResponseEntity edit(@PathVariable int id, String newData) {
+	public ResponseEntity<?> edit(@PathVariable int id, String newData) {
 		HttpStatus httpStatus = HttpStatus.NOT_FOUND;
 		
-		Object o = new Object();
-		synchronized (o) {
-			
-			Optional<Task> optionalTask = repository.findById(id);
-			if (optionalTask.isPresent()) {
-				Task task = optionalTask.get();
-				task.setData(newData);
-				repository.save(task);
-				httpStatus = HttpStatus.OK;
-			}
-			
+		Optional<Task> optionalTask = repository.findById(id);
+		if (optionalTask.isPresent()) {
+			Task task = optionalTask.get();
+			task.setData(newData);
+			repository.save(task);
+			httpStatus = HttpStatus.OK;
 		}
 		return ResponseEntity.status(httpStatus).body(null);
 	}
 	
 	@PatchMapping ("/moveUp/{id}")
-	public ResponseEntity moveUp(@PathVariable int id) {
+	public ResponseEntity<?> moveUp(@PathVariable int id) {
 		return swap(id, id - 1);
 	}
 	
 	@PatchMapping ("/moveDown/{id}")
-	public ResponseEntity moveDown(@PathVariable int id) {
+	public ResponseEntity<?> moveDown(@PathVariable int id) {
 		return swap(id, id + 1);
 	}
 	
 	@DeleteMapping ("/delete/{id}")
-	public ResponseEntity delete(@PathVariable int id) {
+	public ResponseEntity<?> delete(@PathVariable int id) {
 		HttpStatus httpStatus = HttpStatus.NOT_FOUND;
 		
 		Optional<Task> optionalTask = repository.findById(id);
@@ -77,7 +74,7 @@ public class ListController
 		return ResponseEntity.status(httpStatus).body(null);
 	}
 	
-	private ResponseEntity swap(int a, int b) {
+	private ResponseEntity<?> swap(int a, int b) {
 		HttpStatus httpStatus = HttpStatus.BAD_REQUEST;
 		
 		Object o = new Object();
@@ -105,4 +102,5 @@ public class ListController
 		return ResponseEntity.status(httpStatus).body(null);
 	}
 	
+
 }
