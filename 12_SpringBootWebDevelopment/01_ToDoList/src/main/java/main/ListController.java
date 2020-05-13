@@ -1,5 +1,6 @@
 package main;
 
+import main.model.Priority;
 import main.model.Task;
 import main.model.ToDoListRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,91 +15,57 @@ import java.util.Optional;
 @RestController
 public class ListController
 {
+	private static final Priority DEFAULT_PRIORITY = Priority.MEDIUM;
 	
 	@Autowired
 	private ToDoListRepository repository;
 	
-	@GetMapping ("/")
+	@GetMapping ("/tasks/")
 	public List<Task> getAll() {
 		ArrayList<Task> tasks = new ArrayList<>();
 		repository.findAll().forEach(tasks::add);
 		return tasks;
 	}
 	
-	@GetMapping ("/{id}")
+	@GetMapping ("/tasks/{id}")
 	public ResponseEntity<Task> getByNumber(@PathVariable int id) {
 		Optional<Task> optionalTask = repository.findById(id);
 		return optionalTask.map(task -> new ResponseEntity<>(task, HttpStatus.OK)).orElseGet(() -> ResponseEntity.status(HttpStatus.NOT_FOUND).body(null));
 	}
 	
-	@PostMapping (value = "/add")
-	public int addToList(@RequestBody Task task) {
-		return repository.save(task).getId();
+	@PostMapping (value = "/tasks/add")
+	public ResponseEntity<Integer> addToList(@RequestBody Task task) {
+		if (task.getData() == null) { return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(null); }
+		
+		if (task.getPriority() == null) { task.setPriority(DEFAULT_PRIORITY); }
+		
+		return new ResponseEntity<>(repository.save(task).getId(), HttpStatus.OK);
 	}
 	
-	@PatchMapping ("/edit/{id}")
-	public ResponseEntity<?> edit(@PathVariable int id, String newData) {
-		HttpStatus httpStatus = HttpStatus.NOT_FOUND;
-		
+	@PutMapping ("/tasks/edit/{id}")
+	public ResponseEntity<?> edit(@PathVariable int id, @RequestBody Task changes) {
 		Optional<Task> optionalTask = repository.findById(id);
+		
 		if (optionalTask.isPresent()) {
 			Task task = optionalTask.get();
-			task.setData(newData);
+			
+			if (changes.getData() != null) { task.setData(changes.getData()); }
+			if (changes.getPriority() != null) { task.setPriority(changes.getPriority()); }
+			
 			repository.save(task);
-			httpStatus = HttpStatus.OK;
+			return ResponseEntity.status(HttpStatus.OK).body(null);
 		}
-		return ResponseEntity.status(httpStatus).body(null);
+		return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
 	}
 	
-	@PatchMapping ("/moveUp/{id}")
-	public ResponseEntity<?> moveUp(@PathVariable int id) {
-		return swap(id, id - 1);
-	}
-	
-	@PatchMapping ("/moveDown/{id}")
-	public ResponseEntity<?> moveDown(@PathVariable int id) {
-		return swap(id, id + 1);
-	}
-	
-	@DeleteMapping ("/delete/{id}")
+	@DeleteMapping ("/tasks/delete/{id}")
 	public ResponseEntity<?> delete(@PathVariable int id) {
-		HttpStatus httpStatus = HttpStatus.NOT_FOUND;
-		
 		Optional<Task> optionalTask = repository.findById(id);
+		
 		if (optionalTask.isPresent()) {
 			repository.deleteById(id);
-			httpStatus = HttpStatus.OK;
+			return ResponseEntity.status(HttpStatus.OK).body(null);
 		}
-		return ResponseEntity.status(httpStatus).body(null);
+		return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
 	}
-	
-	private ResponseEntity<?> swap(int a, int b) {
-		HttpStatus httpStatus = HttpStatus.BAD_REQUEST;
-		
-		Object o = new Object();
-		synchronized (o) {
-			Optional<Task> first = repository.findById(a);
-			Optional<Task> second = repository.findById(b);
-			
-			if (first.isPresent() && second.isPresent()) {
-				Task firstTask = first.get();
-				Task secondTask = second.get();
-				
-				String firstData = firstTask.getData();
-				
-				firstTask.setData(secondTask.getData());
-				secondTask.setData(firstData);
-				
-				repository.save(firstTask);
-				repository.save(secondTask);
-				
-				
-				httpStatus = HttpStatus.OK;
-			}
-		}
-		
-		return ResponseEntity.status(httpStatus).body(null);
-	}
-	
-	
 }
