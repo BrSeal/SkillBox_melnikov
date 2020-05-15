@@ -7,14 +7,19 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 import java.util.ArrayList;
+import java.util.Date;
 
 @Controller
 public class DefaultController
 {
     @Autowired
     private BookRepository bookRepository;
+
+    @Value("${someParameter.value}")
+    private Integer someParameter;
 
     @RequestMapping("/")
     public String index(Model model)
@@ -26,6 +31,7 @@ public class DefaultController
         }
         model.addAttribute("books", books);
         model.addAttribute("booksCount", books.size());
+        model.addAttribute("someParameter", someParameter);
         return "index";
     }
 }

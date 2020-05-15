@@ -20,7 +20,7 @@ public class DefaultController {
         Iterable<Task> iterableTask = repository.findAll();
         ArrayList<Task> taskList = new ArrayList<>();
         iterableTask.forEach(taskList::add);
-        taskList.sort(Comparator.comparing(Task::getPriority));
+        taskList.sort(Comparator.comparing(Task::getPriority).reversed());
         model.addAttribute("taskList", taskList);
         return "index";
     }
