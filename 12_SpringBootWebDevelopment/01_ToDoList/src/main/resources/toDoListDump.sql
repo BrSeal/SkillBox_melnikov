@@ -26,6 +26,7 @@ CREATE TABLE `tasks` (
   `id` int NOT NULL AUTO_INCREMENT,
   `data` varchar(255) NOT NULL,
   `priority` enum('NEVER_MIND','LOW','MEDIUM','HIGH','VERY_HIGH') NOT NULL,
+  `completed` boolean,
   PRIMARY KEY (`id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;

@@ -2,17 +2,18 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="3515622e-3262-4f78-ade4-b03f01b3e0e4" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/../01_ToDoList/application.properties" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../01_ToDoList/src/main/java/main/model/Task.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../01_ToDoList/src/main/java/main/model/ToDoListRepository.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../01_ToDoList/src/main/resources/static/css/styles.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../01_ToDoList/src/main/resources/static/js/jquery-3.4.0.min.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../01_ToDoList/src/main/resources/static/js/main.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../01_ToDoList/src/main/resources/templates/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../01_ToDoList/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/../01_ToDoList/application.properties" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../01_ToDoList/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../01_ToDoList/pom.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../01_ToDoList/src/main/java/main/ListController.java" beforeDir="false" afterPath="$PROJECT_DIR$/../01_ToDoList/src/main/java/main/ListController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../01_ToDoList/src/main/java/main/model/Task.java" beforeDir="false" afterPath="$PROJECT_DIR$/../01_ToDoList/src/main/java/main/model/Task.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../01_ToDoList/src/main/resources/static/js/main.js" beforeDir="false" afterPath="$PROJECT_DIR$/../01_ToDoList/src/main/resources/static/js/main.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../01_ToDoList/src/main/resources/templates/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/../01_ToDoList/src/main/resources/templates/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../01_ToDoList/src/main/resources/toDoListDump.sql" beforeDir="false" afterPath="$PROJECT_DIR$/../01_ToDoList/src/main/resources/toDoListDump.sql" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../01_ToDoList/src/test/java/main/ToDoListTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/../01_ToDoList/src/test/java/main/ToDoListTest.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/application.yml" beforeDir="false" afterPath="$PROJECT_DIR$/application.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/main/DefaultController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/main/DefaultController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/main/Storage.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/index.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -48,6 +49,7 @@
   </component>
   <component name="PropertiesComponent">
     <property name="DefaultHtmlFileTemplate" value="HTML File" />
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1556358434513" />
     <property name="project.structure.last.edited" value="Project" />
     <property name="project.structure.proportion" value="0.15" />
@@ -80,6 +82,18 @@
       </list>
     </recent_temporary>
   </component>
+  <component name="ServiceViewManager">
+    <option name="viewStates">
+      <list>
+        <serviceView>
+          <treeState>
+            <expand />
+            <select />
+          </treeState>
+        </serviceView>
+      </list>
+    </option>
+  </component>
   <component name="SvnConfiguration">
     <configuration />
   </component>
@@ -97,117 +111,53 @@
     <option featureType="com.intellij.fileTypeFactory" implementationName="*.sql" />
   </component>
   <component name="WindowStateProjectService">
+    <state x="232" y="151" key="#Project_Structure" timestamp="1589546362564">
+      <screen x="0" y="0" width="1280" height="984" />
+    </state>
+    <state x="232" y="151" key="#Project_Structure/0.0.1280.984@0.0.1280.984" timestamp="1589546362564" />
     <state x="756" y="404" width="407" height="238" key="#com.intellij.refactoring.move.moveClassesOrPackages.MoveClassesOrPackagesDialog.classes" timestamp="1588878502746">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="756" y="404" width="407" height="238" key="#com.intellij.refactoring.move.moveClassesOrPackages.MoveClassesOrPackagesDialog.classes/0.0.1920.1040@0.0.1920.1040" timestamp="1588878502746" />
-    <state width="1860" height="359" key="GridCell.Tab.0.bottom" timestamp="1588880857717">
-      <screen x="0" y="0" width="1920" height="1040" />
+    <state width="1237" height="325" key="GridCell.Tab.0.bottom" timestamp="1589546892778">
+      <screen x="0" y="0" width="1280" height="984" />
     </state>
+    <state width="1237" height="325" key="GridCell.Tab.0.bottom/0.0.1280.984@0.0.1280.984" timestamp="1589546892778" />
     <state width="1860" height="359" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1588880857717" />
-    <state width="1860" height="359" key="GridCell.Tab.0.center" timestamp="1588880857716">
-      <screen x="0" y="0" width="1920" height="1040" />
+    <state width="1237" height="325" key="GridCell.Tab.0.center" timestamp="1589546892778">
+      <screen x="0" y="0" width="1280" height="984" />
     </state>
+    <state width="1237" height="325" key="GridCell.Tab.0.center/0.0.1280.984@0.0.1280.984" timestamp="1589546892778" />
     <state width="1860" height="359" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1588880857716" />
-    <state width="1860" height="359" key="GridCell.Tab.0.left" timestamp="1588880857716">
-      <screen x="0" y="0" width="1920" height="1040" />
+    <state width="1237" height="325" key="GridCell.Tab.0.left" timestamp="1589546892778">
+      <screen x="0" y="0" width="1280" height="984" />
     </state>
+    <state width="1237" height="325" key="GridCell.Tab.0.left/0.0.1280.984@0.0.1280.984" timestamp="1589546892778" />
     <state width="1860" height="359" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1588880857716" />
-    <state width="1860" height="359" key="GridCell.Tab.0.right" timestamp="1588880857717">
-      <screen x="0" y="0" width="1920" height="1040" />
+    <state width="1237" height="325" key="GridCell.Tab.0.right" timestamp="1589546892778">
+      <screen x="0" y="0" width="1280" height="984" />
     </state>
+    <state width="1237" height="325" key="GridCell.Tab.0.right/0.0.1280.984@0.0.1280.984" timestamp="1589546892778" />
     <state width="1860" height="359" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1588880857717" />
+    <state width="1237" height="325" key="GridCell.Tab.1.bottom" timestamp="1589546892778">
+      <screen x="0" y="0" width="1280" height="984" />
+    </state>
+    <state width="1237" height="325" key="GridCell.Tab.1.bottom/0.0.1280.984@0.0.1280.984" timestamp="1589546892778" />
+    <state width="1237" height="325" key="GridCell.Tab.1.center" timestamp="1589546892778">
+      <screen x="0" y="0" width="1280" height="984" />
+    </state>
+    <state width="1237" height="325" key="GridCell.Tab.1.center/0.0.1280.984@0.0.1280.984" timestamp="1589546892778" />
+    <state width="1237" height="325" key="GridCell.Tab.1.left" timestamp="1589546892778">
+      <screen x="0" y="0" width="1280" height="984" />
+    </state>
+    <state width="1237" height="325" key="GridCell.Tab.1.left/0.0.1280.984@0.0.1280.984" timestamp="1589546892778" />
+    <state width="1237" height="325" key="GridCell.Tab.1.right" timestamp="1589546892778">
+      <screen x="0" y="0" width="1280" height="984" />
+    </state>
+    <state width="1237" height="325" key="GridCell.Tab.1.right/0.0.1280.984@0.0.1280.984" timestamp="1589546892778" />
     <state x="653" y="230" key="RollbackChangesDialog" timestamp="1588880766536">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="653" y="230" key="RollbackChangesDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1588880766536" />
-  </component>
-  <component name="masterDetails">
-    <states>
-      <state key="ArtifactsStructureConfigurable.UI">
-        <settings>
-          <artifact-editor />
-          <splitter-proportions>
-            <option name="proportions">
-              <list>
-                <option value="0.2" />
-              </list>
-            </option>
-          </splitter-proportions>
-        </settings>
-      </state>
-      <state key="FacetStructureConfigurable.UI">
-        <settings>
-          <last-edited>No facets are configured</last-edited>
-          <splitter-proportions>
-            <option name="proportions">
-              <list>
-                <option value="0.2" />
-              </list>
-            </option>
-          </splitter-proportions>
-        </settings>
-      </state>
-      <state key="GlobalLibrariesConfigurable.UI">
-        <settings>
-          <splitter-proportions>
-            <option name="proportions">
-              <list>
-                <option value="0.2" />
-              </list>
-            </option>
-          </splitter-proportions>
-        </settings>
-      </state>
-      <state key="JdkListConfigurable.UI">
-        <settings>
-          <last-edited>11</last-edited>
-          <splitter-proportions>
-            <option name="proportions">
-              <list>
-                <option value="0.2" />
-              </list>
-            </option>
-          </splitter-proportions>
-        </settings>
-      </state>
-      <state key="ModuleStructureConfigurable.UI">
-        <settings>
-          <last-edited>BookLibrary</last-edited>
-          <splitter-proportions>
-            <option name="proportions">
-              <list>
-                <option value="0.2" />
-                <option value="0.6" />
-              </list>
-            </option>
-          </splitter-proportions>
-        </settings>
-      </state>
-      <state key="ProjectJDKs.UI">
-        <settings>
-          <last-edited>11</last-edited>
-          <splitter-proportions>
-            <option name="proportions">
-              <list>
-                <option value="0.2" />
-              </list>
-            </option>
-          </splitter-proportions>
-        </settings>
-      </state>
-      <state key="ProjectLibrariesConfigurable.UI">
-        <settings>
-          <last-edited>Maven: antlr:antlr:2.7.7</last-edited>
-          <splitter-proportions>
-            <option name="proportions">
-              <list>
-                <option value="0.2" />
-              </list>
-            </option>
-          </splitter-proportions>
-        </settings>
-      </state>
-    </states>
   </component>
 </project>

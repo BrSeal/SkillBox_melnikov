@@ -45,13 +45,13 @@ public class ListController
 	@PutMapping ("/tasks/edit/{id}")
 	public ResponseEntity<?> edit(@PathVariable int id, @RequestBody Task changes) {
 		Optional<Task> optionalTask = repository.findById(id);
-		
 		if (optionalTask.isPresent()) {
 			Task task = optionalTask.get();
 			
 			if (changes.getData() != null) { task.setData(changes.getData()); }
 			if (changes.getPriority() != null) { task.setPriority(changes.getPriority()); }
-			
+			task.setCompleted(changes.isCompleted());
+
 			repository.save(task);
 			return ResponseEntity.status(HttpStatus.OK).body(null);
 		}
