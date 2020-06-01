@@ -43,7 +43,8 @@ public class ListController {
     }
 
     @PutMapping("/tasks/edit/{id}")
-    public ResponseEntity<?> edit(@PathVariable int id, @RequestBody Task changes) {
+    @ResponseBody
+    public ResponseEntity<String> edit(@PathVariable int id, Task changes) {
         Optional<Task> optionalTask = repository.findById(id);
         if (optionalTask.isPresent()) {
             Task task = optionalTask.get();
@@ -56,8 +57,7 @@ public class ListController {
             }
             task.setCompleted(changes.isCompleted());
 
-            repository.save(task);
-            return ResponseEntity.status(HttpStatus.OK).body(null);
+            return new ResponseEntity<>(repository.save(task).getData(), HttpStatus.OK);
         }
         return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
     }

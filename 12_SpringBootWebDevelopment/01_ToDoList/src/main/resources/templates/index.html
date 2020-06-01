@@ -29,15 +29,16 @@
         </select>
         <hr>
         <button id="save-task">Сохранить</button>
+        <button id="edit-task" task-id="">Сохранить изменения</button>
     </form>
 </div>
 <ul id="task-list">
     <th:block th:each="task : ${taskList}">
-        <li >
-            <a href="#" class="task-link" isOpened="false" th:attr="data-id=${task.id}" th:text="${task.data}"></a>
+        <li th:attr="id=${task.id}">
+            <a href="#" class="task-link" th:attr="data-id=${task.id}" th:text="${task.data}"></a>
         </li>
     </th:block>
 </ul>
-<button id='show-task-form'>Добавить задачу</button>
+<button id='show-task-form' method="POST">Добавить задачу</button>
 </body>
 </html>
