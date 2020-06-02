@@ -35,7 +35,10 @@ $(function(){
                     task[dataArray[i]['name']] = dataArray[i]['value'];
                 }
                 appendTask(task);
-            }
+            },
+            error: function(response){
+                alert('Поле "Суть задачи" не может быть пустым!');
+                }
         });
         return false;
     });
@@ -49,14 +52,17 @@ $(function(){
                 url: '/tasks/edit/'+taskId,
                 data: data,
                 success: function(response){
+                    $('#task-form').css('display','none');
                     var infoDivSelector='li[id='+taskId+'] div';
                     if($(infoDivSelector).length>0){
                         $(infoDivSelector).remove();
                     }
                     $('.task-link[data-id='+taskId+']').text(response);
-                }
+                },
+                error: function(response){
+                    alert('Поле "Суть задачи" не может быть пустым!');
+                    }
             });
-            $('#task-form').css('display','none');
             return false;
         });
 

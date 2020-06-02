@@ -1,6 +1,5 @@
 package main;
 
-import main.model.Priority;
 import main.model.Task;
 import main.model.ToDoListRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,7 +13,9 @@ import java.util.Optional;
 
 @RestController
 public class ListController {
-    private static final Priority DEFAULT_PRIORITY = Priority.MEDIUM;
+    private static final ResponseEntity BAD_REQUEST = ResponseEntity.status(HttpStatus.BAD_REQUEST).body(null);
+    private static final ResponseEntity NOT_FOUND = ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
+    private static final ResponseEntity OK = ResponseEntity.status(HttpStatus.OK).body(null);
 
     @Autowired
     private ToDoListRepository repository;
@@ -27,16 +28,16 @@ public class ListController {
     }
 
     @GetMapping("/tasks/{id}")
-    public ResponseEntity<Task> getByNumber(@PathVariable int id) {
+    public ResponseEntity getByNumber(@PathVariable int id) {
         Optional<Task> optionalTask = repository.findById(id);
-        return optionalTask.map(task -> new ResponseEntity<>(task, HttpStatus.OK)).orElseGet(() -> ResponseEntity.status(HttpStatus.NOT_FOUND).body(null));
+        return optionalTask.map(task -> new ResponseEntity<>(task, HttpStatus.OK)).orElse(NOT_FOUND);
     }
 
     @PostMapping(value = "/tasks/add")
     @ResponseBody
     public ResponseEntity<Integer> addToList( Task task) {
         if (task.getData().isEmpty()||task.getData() == null || task.getPriority() == null) {
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(null);
+            return BAD_REQUEST;
         }
 
         return new ResponseEntity<>(repository.save(task).getId(), HttpStatus.OK);
@@ -46,12 +47,14 @@ public class ListController {
     @ResponseBody
     public ResponseEntity<String> edit(@PathVariable int id, Task changes) {
         Optional<Task> optionalTask = repository.findById(id);
+        
         if (optionalTask.isPresent()) {
             Task task = optionalTask.get();
 
-            if (changes.getData() != null) {
-                task.setData(changes.getData());
+            if (changes.getData().isEmpty()) {
+                return BAD_REQUEST;
             }
+	        task.setData(changes.getData());
             if (changes.getPriority() != null) {
                 task.setPriority(changes.getPriority());
             }
@@ -59,7 +62,7 @@ public class ListController {
 
             return new ResponseEntity<>(repository.save(task).getData(), HttpStatus.OK);
         }
-        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
+        return NOT_FOUND;
     }
 
     @DeleteMapping("/tasks/delete/{id}")
@@ -68,8 +71,8 @@ public class ListController {
 
         if (optionalTask.isPresent()) {
             repository.deleteById(id);
-            return ResponseEntity.status(HttpStatus.OK).body(null);
+            return OK;
         }
-        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
+        return NOT_FOUND;
     }
 }
