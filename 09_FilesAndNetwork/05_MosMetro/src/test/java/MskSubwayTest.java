@@ -8,7 +8,5 @@ class MskSubwayTest {
         MskSubway s = new MskSubway();
         s.parse("src/main/resources/MetroMsk.html");
         s.toJson(s, "src/main/resources/Moscow.json");
-    
-        
     }
 }
