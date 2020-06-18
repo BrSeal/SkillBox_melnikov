@@ -6,10 +6,10 @@ public class Shop {
 
     private String name;
 
-    private ArrayList<Integer> goods;
+    private ArrayList<Integer> items;
 
     public Shop(String name) {
-        goods = new ArrayList<>();
+        items = new ArrayList<>();
         this.name = name;
     }
 
@@ -21,7 +21,7 @@ public class Shop {
         this.name = name;
     }
 
-    public ArrayList<Integer> getGoods() {
-        return goods;
+    public ArrayList<Integer> getItems() {
+        return items;
     }
 }

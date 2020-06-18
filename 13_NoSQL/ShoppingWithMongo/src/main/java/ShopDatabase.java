@@ -1,19 +1,24 @@
 import java.util.Scanner;
 
 public class ShopDatabase {
+    private static final String WRONG_COMMAND = "No such command!";
+    private static final String HELLO = "Insert command:";
+
     private static final String HELP = "HELP";
-    private static final String ADD_SHOP = "SHOP";
-    private static final String ADD_ITEM = "ITEM";
+    private static final String ADD_SHOP = "NEW_SHOP";
+    private static final String ADD_ITEM = "NEW_ITEM";
     private static final String ITEM_TO_SHOP = "MOVE";
     private static final String REPORT = "REPORT";
     private static final String EXIT = "EXIT";
+    private static final String REMOVE_ITEM = "REMOVE_ITEM";
+    private static final String REMOVE_SHOP = "REMOVE_SHOP";
 
     private static final MongoRepository repository=new MongoRepository();
     private static Scanner scanner = new Scanner(System.in);
     public static void main(String[] args) {
 
         while (true) {
-            System.out.println("Введите команду:");
+            System.out.println(HELLO);
             command(scanner.nextLine());
         }
     }
@@ -32,6 +37,14 @@ public class ShopDatabase {
 
             case ITEM_TO_SHOP:
                 repository.goodToShop(in[1]);
+                break;
+
+            case REMOVE_ITEM:
+                repository.removeItem(in[1]);
+                break;
+
+            case REMOVE_SHOP:
+                repository.removeShop(in[1]);
                 break;
 
             case REPORT:
@@ -66,7 +79,7 @@ public class ShopDatabase {
     }
 
     private static void error(){
-        System.out.println("Неверно набрана команда!");
+        System.out.println(WRONG_COMMAND);
         help();
     }
 }
